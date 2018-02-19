@@ -3,38 +3,38 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>br.com.sddcbrc</groupId>
-    <artifactId>SDDCBRC</artifactId>
+    <artifactId>SDDBRC</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
     
     <dependencies>
         <dependency>
             <groupId>br.com.sddbrc_conexao</groupId>
-            <artifactId>SDDBRC_Conexao</artifactId>
+            <artifactId>Conexao</artifactId>
             <version>1.0</version>
             <scope>compile</scope> 
         </dependency>
         <dependency>
             <groupId>br.com.sddbrc_seguranca</groupId> 
-            <artifactId>SDDBRC_Seguranca</artifactId>
+            <artifactId>Seguranca</artifactId>
             <version>1.0</version>
             <scope>compile</scope> 
-        </dependency><!--
--->        <dependency>
+        </dependency>
+        <dependency>
             <groupId>br.com.sddbrc_replicacao</groupId>
-            <artifactId>SDDBRC_Replicacao</artifactId>
+            <artifactId>Replicacao</artifactId>
             <version>1.0</version>
             <scope>compile</scope> 
-        </dependency><!--
--->        <dependency>
+        </dependency>       
+        <dependency>
             <groupId>br.com.sddbrc_cluster</groupId>
-            <artifactId>SDDBRC_Cluster</artifactId>
+            <artifactId>Cluster</artifactId>
             <version>1.0</version>
             <scope>compile</scope>
         </dependency>    
         <dependency>
             <groupId>br.com.sddbrc_repositorios</groupId>
-            <artifactId>SDDBRC_Repositorios</artifactId>
+            <artifactId>Repositorios</artifactId>
             <version>1.0</version>
             <scope>compile</scope> 
         </dependency>
@@ -54,5 +54,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>     
+    </properties>
+    <name>SDDBRC</name>
 </project>
