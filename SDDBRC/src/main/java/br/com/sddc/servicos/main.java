@@ -1,7 +1,5 @@
 package br.com.sddc.servicos;
 
-//import br.com.sddc.dao.PessoaDAO;
-//import br.com.sddc.model.PessoaM;
 import java.util.List;
 
 
