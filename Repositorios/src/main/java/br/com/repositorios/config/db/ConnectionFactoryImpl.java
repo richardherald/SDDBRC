@@ -39,7 +39,7 @@ public class ConnectionFactoryImpl implements ConnectionFactory {
         try {
             HikariConfig config = new HikariConfig();
             config.setPoolName(String.valueOf(codigo));
-            config.setJdbcUrl(PROPS.getProperty(codigo + "-JdbcUrl"));
+            config.setJdbcUrl(PROPS.getProperty(codigo + "-url"));
             config.setUsername(PROPS.getProperty(codigo + "-username"));
             config.setPassword(PROPS.getProperty(codigo + "-password"));
             config.setMaximumPoolSize(Integer.valueOf(PROPS.getProperty(codigo + "-maxPoolSize")));
