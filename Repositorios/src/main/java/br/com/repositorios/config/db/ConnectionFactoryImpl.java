@@ -1,56 +1,68 @@
 package br.com.repositorios.config.db;
 
-import static br.com.commons.property.Property.PROPS;
+import br.com.repositorios.model.ConfigBanco;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
+import java.util.HashMap;
+import java.util.Map;
 import javax.sql.DataSource;
 
 public class ConnectionFactoryImpl implements ConnectionFactory {
 
-    private static DataSource sqlServer;
-    private static DataSource postgresql;
-    private static DataSource middleware;
-
-    List<DataSource> datasources = new ArrayList<>();
-
-    private final static Logger LOGGER = Logger.getLogger(ConnectionFactoryImpl.class.getName());
+    protected static Map<String, DataSource> datasources = new HashMap<>();
+    private static int primaryDataBase;
 
     public ConnectionFactoryImpl() {
-        datasources.add(middleware);
-        datasources.add(sqlServer);
-        datasources.add(postgresql);
+
     }
 
     @Override
-    public DataSource getDatasource(int banco) throws Exception {
-        if (datasources.get(banco - 1) == null) {
-            datasources.set(banco - 1, config(banco));
-            return datasources.get(banco - 1);
-        } else {
-            return datasources.get(banco - 1);
+    public DataSource config(ConfigBanco config) throws Exception {
+        try {
+            HikariConfig hikariConfig = new HikariConfig();
+            hikariConfig.setPoolName(config.getConfigBanco_PoolName());
+            hikariConfig.setJdbcUrl(config.getConfigBanco_JdbcUrl());
+            hikariConfig.setUsername(config.getConfigBanco_Username());
+            hikariConfig.setPassword(config.getConfigBanco_PoolName());
+            hikariConfig.setMaximumPoolSize(config.getConfigBanco_MaximumPoolSize());
+            if (config.getConfigBanco_CacheSize() > 0) {
+                hikariConfig.addDataSourceProperty("cachePrepStmts", "true");
+                hikariConfig.addDataSourceProperty("prepStmtCacheSize", config.getConfigBanco_CacheSize());
+                if (config.getConfigBanco_CacheSizeLimit() < config.getConfigBanco_CacheSize()) {
+                    hikariConfig.addDataSourceProperty("prepStmtCacheSqlLimit", config.getConfigBanco_CacheSize());
+                } else {
+                    hikariConfig.addDataSourceProperty("prepStmtCacheSqlLimit", config.getConfigBanco_CacheSizeLimit());
+                }
+            }
+            return new HikariDataSource(hikariConfig);
+        } catch (Exception e) {
+            throw e;
         }
     }
 
     @Override
-    public DataSource config(int codigo) throws Exception {
+    public DataSource config(String directory) throws Exception {
         try {
-            HikariConfig config = new HikariConfig();
-            config.setPoolName(String.valueOf(codigo));
-            config.setJdbcUrl(PROPS.getProperty(codigo + "-url"));
-            config.setUsername(PROPS.getProperty(codigo + "-username"));
-            config.setPassword(PROPS.getProperty(codigo + "-password"));
-            config.setMaximumPoolSize(Integer.valueOf(PROPS.getProperty(codigo + "-maxPoolSize")));
-            config.setAutoCommit(Boolean.valueOf(PROPS.getProperty(codigo + "-autoCommit")));
-            config.addDataSourceProperty("cachePrepStmts", "true");
-            config.addDataSourceProperty("prepStmtCacheSize", "250");
-            config.addDataSourceProperty("prepStmtCacheSqlLimit", "4096");
+            HikariConfig config = new HikariConfig(directory);
             return new HikariDataSource(config);
         } catch (Exception e) {
             throw e;
         }
     }
 
+    public DataSource getDatasources(String poolName) throws Exception {
+        return datasources.get(poolName);
+    }
+
+    public void setDatasources(Map<String, DataSource> aDatasources) {
+        datasources = aDatasources;
+    }
+
+    public static int getPrimaryDataBase() {
+        return primaryDataBase;
+    }
+
+    public static void setPrimaryDataBase(int aPrimaryDataBase) {
+        primaryDataBase = aPrimaryDataBase;
+    }
 }
