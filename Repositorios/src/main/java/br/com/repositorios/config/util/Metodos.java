@@ -13,8 +13,8 @@ public class Metodos {
     public PreparedStatement ps = null;
     public ResultSet resultSet = null;
 
-    public Connection getConnection(int banco) throws Exception {
-        return connectionHikari.getDatasource(banco).getConnection();
+    public Connection getConnection(String poolName) throws Exception {
+        return connectionHikari.getDatasource(poolName).getConnection();
     }
 
     public void closeConnection() throws SQLException {
