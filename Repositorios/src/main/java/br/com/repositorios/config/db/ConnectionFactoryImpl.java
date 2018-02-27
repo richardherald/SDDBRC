@@ -1,19 +1,23 @@
 package br.com.repositorios.config.db;
 
+import br.com.repositorios.model.Banco;
 import br.com.repositorios.model.ConfigBanco;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.sql.DataSource;
 
 public class ConnectionFactoryImpl implements ConnectionFactory {
 
-    protected static Map<String, DataSource> datasources = new HashMap<>();
+    protected static Map<Integer, DataSource> poolReplication = new HashMap<>();
+    private static DataSource poolMiddleware;
+    private static List<Banco> listDataBases = new ArrayList<>();
     private static int primaryDataBase;
 
     public ConnectionFactoryImpl() {
-
     }
 
     @Override
@@ -41,28 +45,48 @@ public class ConnectionFactoryImpl implements ConnectionFactory {
     }
 
     @Override
-    public DataSource config(String directory) throws Exception {
+    public DataSource config(String directoryConfiguration) throws Exception {
         try {
-            HikariConfig config = new HikariConfig(directory);
+            HikariConfig config = new HikariConfig(directoryConfiguration);
             return new HikariDataSource(config);
         } catch (Exception e) {
             throw e;
         }
     }
 
-    public DataSource getDatasources(String poolName) throws Exception {
-        return datasources.get(poolName);
+    public DataSource getPoolReplication() throws Exception {
+        return poolReplication.get(primaryDataBase);
     }
 
-    public void setDatasources(Map<String, DataSource> aDatasources) {
-        datasources = aDatasources;
+    public DataSource getPrimaryPoolReplication() throws Exception {
+        return poolReplication.get(primaryDataBase);
+    }
+
+    public DataSource getPoolMiddleware() throws Exception {
+        return poolMiddleware;
+    }
+
+    public void setPoolReplication(Map<Integer, DataSource> aPoolReplication) {
+        poolReplication = aPoolReplication;
     }
 
     public static int getPrimaryDataBase() {
         return primaryDataBase;
     }
 
-    public static void setPrimaryDataBase(int aPrimaryDataBase) {
+    public void setPrimaryDataBase(int aPrimaryDataBase) {
         primaryDataBase = aPrimaryDataBase;
+    }
+
+    public void setPoolMiddleware(DataSource aPoolMiddleware) {
+        poolMiddleware = aPoolMiddleware;
+    }
+
+    public List<Banco> getListDataBases() {
+        return listDataBases;
+    }
+
+    public void setListDataBases(List<Banco> aListDataBases) {
+        listDataBases = aListDataBases;
     }
 }

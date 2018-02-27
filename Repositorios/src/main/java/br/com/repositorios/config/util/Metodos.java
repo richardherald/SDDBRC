@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Metodos {
 
@@ -13,8 +14,16 @@ public class Metodos {
     public PreparedStatement ps = null;
     public ResultSet resultSet = null;
 
-    public Connection getConnection(String poolName) throws Exception {
-        return connectionHikari.getDatasource(poolName).getConnection();
+    public Connection getConnectionPrimaryPool() throws Exception {
+        return connectionHikari.getPrimaryPoolReplication().getConnection();
+    }
+
+    public Connection getConnection() throws Exception {
+        return connectionHikari.getPoolReplication().getConnection();
+    }
+
+    public Connection getConnectionMiddleware() throws Exception {
+        return connectionHikari.getPoolMiddleware().getConnection();
     }
 
     public void closeConnection() throws SQLException {
@@ -51,6 +60,24 @@ public class Metodos {
             } else {
                 throw new SQLException("O registro foi criado, mas ocorreu um problema ao retornar o id do registro.");
             }
+        }
+    }
+
+    public void executeScript(String command, String script, Connection conn) throws Exception {
+        try (Statement st = (PreparedStatement) conn.createStatement()) {
+            switch (command) {
+                case "INSERT":
+                    st.executeUpdate(script);
+                    break;
+                case "UPDATE":
+                    st.executeUpdate(script);
+                    break;
+                case "DELETE":
+                    st.executeUpdate(script);
+                    break;
+            }
+        } catch (SQLException e) {
+            throw e;
         }
     }
 }

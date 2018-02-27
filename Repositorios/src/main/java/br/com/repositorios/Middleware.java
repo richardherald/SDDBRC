@@ -11,7 +11,7 @@ public class Middleware extends Metodos {
 
     public List<Banco> listDataBases() throws SQLException, Exception {
         try {
-            conn = getConnection("MIDDLEWARE");
+            conn = getConnectionMiddleware();
             ps = conn.prepareStatement("select * from Banco");
             resultSet = ps.executeQuery();
             List<Banco> bancos = new ArrayList<>();
@@ -34,8 +34,8 @@ public class Middleware extends Metodos {
 
     public List<ConfigBanco> findConfiguration(int banco_Id) throws Exception {
         try {
-            conn = getConnection("MIDDLEWARE");
-            ps = conn.prepareStatement("select * from ConfigBanco");
+            conn = getConnectionMiddleware();
+            ps = conn.prepareStatement("select * from ConfigBanco where banco_Id = " + banco_Id);
             resultSet = ps.executeQuery();
             List<ConfigBanco> configurations = new ArrayList<>();
             while (resultSet.next()) {
