@@ -1,4 +1,4 @@
-package br.com.commons.property;
+package br.com.sddbrc.commons.property;
 
 import java.io.IOException;
 import java.io.InputStream;
