@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <architect-project version="1.0" appversion="1.0.8">
- <project-name>Sistema</project-name>
+ <project-name>modelagem</project-name>
  <print-settings numCopies="1" zoom="1.0" pageNumbersPrinted="true" orientation="1" paperWidth="612.0" paperHeight="792.0" leftBorder="50.0" rightBorder="50.0" topBorder="50.0" bottomBorder="50.0" />
  <project-data-sources>
   <data-source id="DS0">
@@ -115,84 +115,107 @@
     <column id="COL30" populated="true" UUID="b6602680-462d-41d2-85a1-b9aa56c105a1" autoIncrement="false" autoIncrementSequenceName="ConfigBanco_configBanco_Senha_seq" defaultValue="" name="configBanco_Senha" nullable="0" physicalName="configBanco_Senha" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL31" populated="true" UUID="eae7edb4-fc2d-48c7-827e-b2d34ed38604" autoIncrement="false" autoIncrementSequenceName="Banco_banco_Id_seq" defaultValue="" name="banco_Id" nullable="0" physicalName="banco_Id" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
-     <remarks></remarks>
-    </column>
     </folder>
     <folder id="FOLTAB273" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
     </folder>
     <folder id="FOLTAB272" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
     <folder id="FOLTAB274" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX32" populated="true" UUID="22e395be-8122-4217-b3a5-34e75eecebda" clustered="false" name="configBanco_Id" physicalName="configBanco_Id" primaryKeyIndex="true" unique="false" >
-     <index-column id="IDC33" populated="true" UUID="d945829d-3315-4c9b-8a62-2c36b884b39c" ascendingOrDescending="UNSPECIFIED" column-ref="COL28" name="configBanco_Id" physicalName="configBanco_Id" />
+    <index id="IDX31" populated="true" UUID="22e395be-8122-4217-b3a5-34e75eecebda" clustered="false" name="configBanco_Id" physicalName="configBanco_Id" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC32" populated="true" UUID="d945829d-3315-4c9b-8a62-2c36b884b39c" ascendingOrDescending="UNSPECIFIED" column-ref="COL28" name="configBanco_Id" physicalName="configBanco_Id" />
     </index>
    </folder>
   </table>
-  <table id="TAB34" populated="true" UUID="483b79ab-af35-4e1f-9ba5-b1567a791bed" name="Banco_R_Transacao" objectType="TABLE" physicalName="Banco_R_Transacao" >
+  <table id="TAB33" populated="true" UUID="9ec0b9d9-aca2-45ae-84f7-d586693f31bc" name="Banco_R_ConfigBanco" objectType="TABLE" physicalName="Banco_R_ConfigBanco" >
    <remarks></remarks>
-   <folder id="FOLTAB341" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL35" populated="true" UUID="cb58fa7b-c99d-4c15-813e-fcedf361a180" autoIncrement="true" autoIncrementSequenceName="Banco_R_Transacao_Banco_R_Transacao_Id_seq" defaultValue="" name="Banco_R_Transacao_Id" nullable="0" physicalName="Banco_R_Transacao_Id" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+   <folder id="FOLTAB331" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL34" populated="true" UUID="6a9e225c-20f7-4635-938a-00815dac8805" autoIncrement="true" autoIncrementSequenceName="Banco_R_ConfigBanco_banco_R_ConfigBanco_Id_seq" defaultValue="" name="banco_R_ConfigBanco_Id" nullable="0" physicalName="banco_R_ConfigBanco_Id" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
-    <column id="COL36" populated="true" UUID="8991919b-c24d-4557-b4d2-9839a0a6675a" autoIncrement="false" autoIncrementSequenceName="Transacao_LogTransacao_Id_seq" defaultValue="" name="LogTransacao_Id" nullable="0" physicalName="LogTransacao_Id" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL35" populated="true" UUID="e5d6a3e8-9ed7-4bc5-bec3-b61cf8ec6db6" autoIncrement="false" autoIncrementSequenceName="Banco_banco_Id_seq" defaultValue="" name="banco_Id" nullable="0" physicalName="banco_Id" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
-    <column id="COL37" populated="true" UUID="6fd91914-aecc-41ab-9dce-d54504fc86be" autoIncrement="false" autoIncrementSequenceName="Banco_banco_Id_seq" defaultValue="" name="banco_Id" nullable="0" physicalName="banco_Id" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
-     <remarks></remarks>
-    </column>
-    <column id="COL38" populated="true" UUID="fea17f83-6163-4f87-89b0-2bdb36c660f1" autoIncrement="false" autoIncrementSequenceName="Sincronizacao_sincronizacao_Id_seq_1" defaultValue="" name="sincronizacao_Id" nullable="0" physicalName="sincronizacao_Id" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL36" populated="true" UUID="6809bdef-94fe-48bc-88d8-a0e65bd8d806" autoIncrement="false" autoIncrementSequenceName="ConfigBanco_configBanco_Id_seq" defaultValue="" name="configBanco_Id" nullable="0" physicalName="configBanco_Id" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
     </folder>
-    <folder id="FOLTAB343" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    <folder id="FOLTAB333" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
     </folder>
-    <folder id="FOLTAB342" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    <folder id="FOLTAB332" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
-    <folder id="FOLTAB344" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX39" populated="true" UUID="57b184d1-63af-44f5-afc1-ebbf87f61d70" clustered="false" name="banco_R_Transacao_Id" physicalName="banco_R_Transacao_Id" primaryKeyIndex="true" unique="false" >
-     <index-column id="IDC40" populated="true" UUID="bff2364f-efc9-44b1-96e8-006fa655effd" ascendingOrDescending="UNSPECIFIED" column-ref="COL35" name="Banco_R_Transacao_Id" physicalName="Banco_R_Transacao_Id" />
+    <folder id="FOLTAB334" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX37" populated="true" UUID="57309d68-b47f-4690-94e8-1b7cb69d1f96" clustered="false" name="banco_R_ConfigBanco_Id" physicalName="banco_R_ConfigBanco_Id" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC38" populated="true" UUID="9eeb92f5-260b-4607-985d-743833479e50" ascendingOrDescending="UNSPECIFIED" column-ref="COL34" name="banco_R_ConfigBanco_Id" physicalName="banco_R_ConfigBanco_Id" />
     </index>
    </folder>
   </table>
-  <table id="TAB41" populated="true" UUID="1f0a0d88-8ab4-462f-90a6-259f442e79fd" name="Identificador" objectType="TABLE" physicalName="Identificador" >
+  <table id="TAB39" populated="true" UUID="483b79ab-af35-4e1f-9ba5-b1567a791bed" name="Banco_R_Transacao" objectType="TABLE" physicalName="Banco_R_Transacao" >
    <remarks></remarks>
-   <folder id="FOLTAB411" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL42" populated="true" UUID="31691715-4870-4788-a0d4-bfe16cba5e76" autoIncrement="true" autoIncrementSequenceName="Identificador_Identificador_Id_seq" defaultValue="" name="Identificador_Id" nullable="0" physicalName="Identificador_Id" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+   <folder id="FOLTAB391" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL40" populated="true" UUID="cb58fa7b-c99d-4c15-813e-fcedf361a180" autoIncrement="true" autoIncrementSequenceName="Banco_R_Transacao_Banco_R_Transacao_Id_seq" defaultValue="" name="Banco_R_Transacao_Id" nullable="0" physicalName="Banco_R_Transacao_Id" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
-    <column id="COL43" populated="true" UUID="6d967e36-a6b4-4fba-978f-cafd1fe49a26" autoIncrement="false" autoIncrementSequenceName="Identificador_Identificador_Tabela_seq" defaultValue="" name="Identificador_Tabela" nullable="0" physicalName="Identificador_Tabela" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL41" populated="true" UUID="8991919b-c24d-4557-b4d2-9839a0a6675a" autoIncrement="false" autoIncrementSequenceName="Transacao_LogTransacao_Id_seq" defaultValue="" name="LogTransacao_Id" nullable="0" physicalName="LogTransacao_Id" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
-    <column id="COL44" populated="true" UUID="846a0fe6-5d14-4d29-8e0e-95bd3c8ba39c" autoIncrement="false" autoIncrementSequenceName="Identificador_Identificador_Coluna_seq" defaultValue="" name="Identificador_Coluna" nullable="0" physicalName="Identificador_Coluna" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL42" populated="true" UUID="6fd91914-aecc-41ab-9dce-d54504fc86be" autoIncrement="false" autoIncrementSequenceName="Banco_banco_Id_seq" defaultValue="" name="banco_Id" nullable="0" physicalName="banco_Id" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
-    <column id="COL45" populated="true" UUID="77594fd5-5bc7-4faf-a921-5575e820d6d1" autoIncrement="false" autoIncrementSequenceName="Identificador_Identificador_Valor_seq" defaultValue="" name="Identificador_Valor" nullable="0" physicalName="Identificador_Valor" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL43" populated="true" UUID="fea17f83-6163-4f87-89b0-2bdb36c660f1" autoIncrement="false" autoIncrementSequenceName="Sincronizacao_sincronizacao_Id_seq_1" defaultValue="" name="sincronizacao_Id" nullable="0" physicalName="sincronizacao_Id" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
     </folder>
-    <folder id="FOLTAB413" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    <folder id="FOLTAB393" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
     </folder>
-    <folder id="FOLTAB412" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    <folder id="FOLTAB392" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
-    <folder id="FOLTAB414" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX46" populated="true" UUID="14442998-ed24-47ab-b9c9-eae830499460" clustered="false" name="Identificador_pk" physicalName="Identificador_pk" primaryKeyIndex="true" unique="false" >
-     <index-column id="IDC47" populated="true" UUID="077c27d8-4f28-417d-bd0b-992bd22866c0" ascendingOrDescending="UNSPECIFIED" column-ref="COL42" name="Identificador_Id" physicalName="Identificador_Id" />
+    <folder id="FOLTAB394" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX44" populated="true" UUID="57b184d1-63af-44f5-afc1-ebbf87f61d70" clustered="false" name="banco_R_Transacao_Id" physicalName="banco_R_Transacao_Id" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC45" populated="true" UUID="bff2364f-efc9-44b1-96e8-006fa655effd" ascendingOrDescending="UNSPECIFIED" column-ref="COL40" name="Banco_R_Transacao_Id" physicalName="Banco_R_Transacao_Id" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB46" populated="true" UUID="1f0a0d88-8ab4-462f-90a6-259f442e79fd" name="Identificador" objectType="TABLE" physicalName="Identificador" >
+   <remarks></remarks>
+   <folder id="FOLTAB461" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL47" populated="true" UUID="31691715-4870-4788-a0d4-bfe16cba5e76" autoIncrement="true" autoIncrementSequenceName="Identificador_Identificador_Id_seq" defaultValue="" name="Identificador_Id" nullable="0" physicalName="Identificador_Id" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL48" populated="true" UUID="6d967e36-a6b4-4fba-978f-cafd1fe49a26" autoIncrement="false" autoIncrementSequenceName="Identificador_Identificador_Tabela_seq" defaultValue="" name="Identificador_Tabela" nullable="0" physicalName="Identificador_Tabela" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL49" populated="true" UUID="846a0fe6-5d14-4d29-8e0e-95bd3c8ba39c" autoIncrement="false" autoIncrementSequenceName="Identificador_Identificador_Coluna_seq" defaultValue="" name="Identificador_Coluna" nullable="0" physicalName="Identificador_Coluna" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL50" populated="true" UUID="77594fd5-5bc7-4faf-a921-5575e820d6d1" autoIncrement="false" autoIncrementSequenceName="Identificador_Identificador_Valor_seq" defaultValue="" name="Identificador_Valor" nullable="0" physicalName="Identificador_Valor" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB463" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB462" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB464" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX51" populated="true" UUID="14442998-ed24-47ab-b9c9-eae830499460" clustered="false" name="Identificador_pk" physicalName="Identificador_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC52" populated="true" UUID="077c27d8-4f28-417d-bd0b-992bd22866c0" ascendingOrDescending="UNSPECIFIED" column-ref="COL47" name="Identificador_Id" physicalName="Identificador_Id" />
     </index>
    </folder>
   </table>
   <relationships>
-   <relationship id="REL48" populated="true" UUID="71b679fc-7d48-4e69-9fc4-b9d30f798846" deferrability="7" deleteRule="3" fk-table-ref="TAB34" fkCardinality="7" identifying="false" name="Banco_Banco_R_Transacao_fk" physicalName="Banco_Banco_R_Transacao_fk" pk-table-ref="TAB1" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP49" populated="true" UUID="e65350b6-e399-49f0-aeb1-b2300e36b1b2" fk-column-ref="COL37" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL2" />
+   <relationship id="REL53" populated="true" UUID="d8121ba7-e6cf-48f2-a975-d8139b043fc2" deferrability="7" deleteRule="3" fk-table-ref="TAB33" fkCardinality="7" identifying="false" name="Banco_Banco_R_ConfigBanco_fk" physicalName="Banco_Banco_R_ConfigBanco_fk" pk-table-ref="TAB1" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP54" populated="true" UUID="9abda842-f6ed-405b-b3ac-b685de15968f" fk-column-ref="COL35" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL2" />
    </relationship>
-   <relationship id="REL50" populated="true" UUID="035f9dd7-619c-488e-a34d-b24507d1dbae" deferrability="7" deleteRule="3" fk-table-ref="TAB27" fkCardinality="7" identifying="false" name="Banco_ConfigBanco_fk" physicalName="Banco_ConfigBanco_fk" pk-table-ref="TAB1" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP51" populated="true" UUID="da97e7a5-1f0f-499f-8e57-ee10f67ee9ff" fk-column-ref="COL31" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL2" />
+   <relationship id="REL55" populated="true" UUID="71b679fc-7d48-4e69-9fc4-b9d30f798846" deferrability="7" deleteRule="3" fk-table-ref="TAB39" fkCardinality="7" identifying="false" name="Banco_Banco_R_Transacao_fk" physicalName="Banco_Banco_R_Transacao_fk" pk-table-ref="TAB1" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP56" populated="true" UUID="e65350b6-e399-49f0-aeb1-b2300e36b1b2" fk-column-ref="COL42" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL2" />
    </relationship>
-   <relationship id="REL52" populated="true" UUID="b9c2ef29-7b0c-4485-b3cd-a423fdf2b871" deferrability="7" deleteRule="3" fk-table-ref="TAB34" fkCardinality="7" identifying="false" name="Transacao_Banco_R_Transacao_fk" physicalName="Transacao_Banco_R_Transacao_fk" pk-table-ref="TAB12" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP53" populated="true" UUID="9a376c46-e906-4ff6-a83c-1b97543e431f" fk-column-ref="COL36" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL13" />
+   <relationship id="REL57" populated="true" UUID="b9c2ef29-7b0c-4485-b3cd-a423fdf2b871" deferrability="7" deleteRule="3" fk-table-ref="TAB39" fkCardinality="7" identifying="false" name="Transacao_Banco_R_Transacao_fk" physicalName="Transacao_Banco_R_Transacao_fk" pk-table-ref="TAB12" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP58" populated="true" UUID="9a376c46-e906-4ff6-a83c-1b97543e431f" fk-column-ref="COL41" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL13" />
    </relationship>
-   <relationship id="REL54" populated="true" UUID="31e784b6-ad27-40a3-bf3f-6fe0fb55c128" deferrability="7" deleteRule="3" fk-table-ref="TAB34" fkCardinality="7" identifying="false" name="Sincronizacao_Banco_R_Transacao_fk" physicalName="Sincronizacao_Banco_R_Transacao_fk" pk-table-ref="TAB21" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP55" populated="true" UUID="5c021a00-a6fc-4e26-8acd-6d1e96fb3bfd" fk-column-ref="COL38" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL22" />
+   <relationship id="REL59" populated="true" UUID="31e784b6-ad27-40a3-bf3f-6fe0fb55c128" deferrability="7" deleteRule="3" fk-table-ref="TAB39" fkCardinality="7" identifying="false" name="Sincronizacao_Banco_R_Transacao_fk" physicalName="Sincronizacao_Banco_R_Transacao_fk" pk-table-ref="TAB21" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP60" populated="true" UUID="5c021a00-a6fc-4e26-8acd-6d1e96fb3bfd" fk-column-ref="COL43" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL22" />
+   </relationship>
+   <relationship id="REL61" populated="true" UUID="18c528b6-8161-4da3-a7e4-b7a4de8ae968" deferrability="7" deleteRule="3" fk-table-ref="TAB33" fkCardinality="7" identifying="false" name="ConfigBanco_Banco_R_ConfigBanco_fk" physicalName="ConfigBanco_Banco_R_ConfigBanco_fk" pk-table-ref="TAB27" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP62" populated="true" UUID="8c9d2df7-db61-4ef2-84d1-9fef5b023c14" fk-column-ref="COL36" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL28" />
    </relationship>
   </relationships>
  </target-database>
@@ -200,16 +223,18 @@
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
  <play-pen zoom="0.9999999999999998" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
-  <table-pane table-ref="TAB1" x="197" y="306" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB1" x="187" y="248" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB12" x="647" y="119" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
-  <table-pane table-ref="TAB21" x="1078" y="341" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
-  <table-pane table-ref="TAB27" x="183" y="606" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
-  <table-pane table-ref="TAB34" x="634" y="333" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
-  <table-pane table-ref="TAB41" x="645" y="549" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
-  <table-link relationship-ref="REL52" pkConnection="0.45692883895131087" fkConnection="0.5252918287937743" rLineColor="0x555555" pkLabelText="" fkLabelText="" orientation="132"/>
-  <table-link relationship-ref="REL48" pkConnection="0.48936170212765956" fkConnection="0.49411764705882355" rLineColor="0x555555" pkLabelText="" fkLabelText="" orientation="33"/>
-  <table-link relationship-ref="REL54" pkConnection="0.49295774647887325" fkConnection="0.5058823529411764" rLineColor="0x555555" pkLabelText="" fkLabelText="" orientation="18"/>
-  <table-link relationship-ref="REL50" pkConnection="0.4977168949771689" fkConnection="0.5082644628099173" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="132"/>
+  <table-pane table-ref="TAB21" x="1214" y="336" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB27" x="258" y="839" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB33" x="232" y="628" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB39" x="634" y="333" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB46" x="731" y="614" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-link relationship-ref="REL53" pkConnection="0.549407114624506" fkConnection="0.369281045751634" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="132"/>
+  <table-link relationship-ref="REL61" pkConnection="0.4982078853046595" fkConnection="0.5392156862745098" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="72"/>
+  <table-link relationship-ref="REL57" pkConnection="0.4533762057877814" fkConnection="0.5202702702702703" rLineColor="0x555555" pkLabelText="" fkLabelText="" orientation="132"/>
+  <table-link relationship-ref="REL55" pkConnection="0.44696969696969696" fkConnection="0.5" rLineColor="0x555555" pkLabelText="" fkLabelText="" orientation="33"/>
+  <table-link relationship-ref="REL59" pkConnection="0.4925373134328358" fkConnection="0.45" rLineColor="0x555555" pkLabelText="" fkLabelText="" orientation="18"/>
  </play-pen>
  <critic-manager>
   <critic-grouping platformType="Generic" enabled="true">
