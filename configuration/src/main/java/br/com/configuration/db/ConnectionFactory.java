@@ -1,11 +1,12 @@
-package br.com.repositorios.config.db;
+package br.com.configuration.db;
 
-import br.com.repositorios.model.ConfigBanco;
+
+import br.com.commons.model.Configuration;
 import javax.sql.DataSource;
 
 public interface ConnectionFactory {
 
-    DataSource config(ConfigBanco config) throws Exception;
+    DataSource config(Configuration config) throws Exception;
 
     DataSource config(String directory) throws Exception;
 

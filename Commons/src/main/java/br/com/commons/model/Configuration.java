@@ -1,43 +1,92 @@
 
-package br.com.configuration.model;
+package br.com.commons.model;
 
-public class ConfigBanco {
-    private Integer configBanco_Id;
-    private String configBanco_Usuario;
-    private String configBanco_Senha;
+public class Configuration {
+    private Integer configuration_Id;
+    private String configuration_Username;
+    private String configuration_Password;
+    private String configuration_Poolname;
+    private String configuration_PoolJdbcurl;
+    private Integer configuration_Maxpoolsize;
+    private Integer configuration_Cachesize;
+    private Integer configuration_Cachesizelimit;
 
-    public ConfigBanco() {
+    public Configuration() {
     }
 
-    public ConfigBanco(Integer configBanco_Id, String configBanco_Usuario, String configBanco_Senha) {
-        this.configBanco_Id = configBanco_Id;
-        this.configBanco_Usuario = configBanco_Usuario;
-        this.configBanco_Senha = configBanco_Senha;
+    public Configuration(Integer configuration_Id, String configuration_Username, String configuration_Password, Integer configuration_Maxpoolsize, Integer configuration_Cachesize, Integer configuration_Cachesizelimit) {
+        this.configuration_Id = configuration_Id;
+        this.configuration_Username = configuration_Username;
+        this.configuration_Password = configuration_Password;
+        this.configuration_Maxpoolsize = configuration_Maxpoolsize;
+        this.configuration_Cachesize = configuration_Cachesize;
+        this.configuration_Cachesizelimit = configuration_Cachesizelimit;
     }
 
-    public Integer getConfigBanco_Id() {
-        return configBanco_Id;
+    public Integer getConfiguration_Id() {
+        return configuration_Id;
     }
 
-    public void setConfigBanco_Id(Integer configBanco_Id) {
-        this.configBanco_Id = configBanco_Id;
+    public void setConfiguration_Id(Integer configuration_Id) {
+        this.configuration_Id = configuration_Id;
     }
 
-    public String getConfigBanco_Usuario() {
-        return configBanco_Usuario;
+    public String getConfiguration_Username() {
+        return configuration_Username;
     }
 
-    public void setConfigBanco_Usuario(String configBanco_Usuario) {
-        this.configBanco_Usuario = configBanco_Usuario;
+    public void setConfiguration_Username(String configuration_Username) {
+        this.configuration_Username = configuration_Username;
     }
 
-    public String getConfigBanco_Senha() {
-        return configBanco_Senha;
+    public String getConfiguration_Password() {
+        return configuration_Password;
     }
 
-    public void setConfigBanco_Senha(String configBanco_Senha) {
-        this.configBanco_Senha = configBanco_Senha;
+    public void setConfiguration_Password(String configuration_Password) {
+        this.configuration_Password = configuration_Password;
     }
+
+    public String getConfiguration_Poolname() {
+        return configuration_Poolname;
+    }
+
+    public void setConfiguration_Poolname(String configuration_Poolname) {
+        this.configuration_Poolname = configuration_Poolname;
+    }
+
+    public String getConfiguration_PoolJdbcurl() {
+        return configuration_PoolJdbcurl;
+    }
+
+    public void setConfiguration_PoolJdbcurl(String configuration_PoolJdbcurl) {
+        this.configuration_PoolJdbcurl = configuration_PoolJdbcurl;
+    }
+
+    public Integer getConfiguration_Maxpoolsize() {
+        return configuration_Maxpoolsize;
+    }
+
+    public void setConfiguration_Maxpoolsize(Integer configuration_Maxpoolsize) {
+        this.configuration_Maxpoolsize = configuration_Maxpoolsize;
+    }
+
+    public Integer getConfiguration_Cachesize() {
+        return configuration_Cachesize;
+    }
+
+    public void setConfiguration_Cachesize(Integer configuration_Cachesize) {
+        this.configuration_Cachesize = configuration_Cachesize;
+    }
+
+    public Integer getConfiguration_Cachesizelimit() {
+        return configuration_Cachesizelimit;
+    }
+
+    public void setConfiguration_Cachesizelimit(Integer configuration_Cachesizelimit) {
+        this.configuration_Cachesizelimit = configuration_Cachesizelimit;
+    }
+
     
     
 }

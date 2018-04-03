@@ -1,6 +1,7 @@
-package br.com.repositorios.config.util;
+package br.com.persistence_impl;
 
-import br.com.repositorios.config.db.ConnectionFactoryImpl;
+import br.com.configuration_impl.db.ConnectionFactoryImpl;
+import br.com.sddbrc.core.ConfigurationC;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,48 +10,34 @@ import java.sql.Statement;
 
 public class Metodos {
 
-    public static ConnectionFactoryImpl connectionHikari = new ConnectionFactoryImpl();
-    public Connection conn = null;
-    public PreparedStatement ps = null;
-    public ResultSet resultSet = null;
+    private static ConnectionFactoryImpl connectionHikari;
+    private static ConfigurationC configurationC = new ConfigurationC();
 
-    public Connection getConnectionPrimaryPool() throws Exception {
-        return connectionHikari.getPrimaryPoolReplication().getConnection();
+    protected Connection getConnectionPrimaryPool() throws Exception {
+        return getConnectionHikari().getPrimaryPoolReplication().getConnection();
     }
 
-    public Connection getConnection() throws Exception {
-        return connectionHikari.getPoolReplication().getConnection();
+    protected Connection getConnection() throws Exception {
+        return getConnectionHikari().getPoolReplication().getConnection();
     }
 
-    public Connection getConnectionMiddleware() throws Exception {
-        return connectionHikari.getPoolMiddleware().getConnection();
+    protected Connection getConnectionMiddleware() throws Exception {
+        return getConnectionHikari().getPoolMiddleware().getConnection();
     }
 
-    public void closeConnection() throws SQLException {
-        if (resultSet != null) {
-            resultSet.close();
+    protected static ConnectionFactoryImpl getConnectionHikari() {
+        if (connectionHikari == null) {
+            connectionHikari = configurationC.connectionFactoryImpl();
+            return connectionHikari;
         }
-        if (ps != null) {
-            ps.close();
-        }
-        if (conn != null) {
-            conn.close();
-        }
+        return connectionHikari;
     }
 
-    public void closeConnection(ResultSet resultSet, PreparedStatement ps, Connection conn) throws SQLException {
-        if (resultSet != null) {
-            resultSet.close();
-        }
-        if (ps != null) {
-            ps.close();
-        }
-        if (conn != null) {
-            conn.close();
-        }
+    protected void closeConnection(ResultSet resultSet, PreparedStatement ps, Connection conn) throws SQLException {
+        configurationC.closeConnection(resultSet, ps, conn);
     }
 
-    public int returnGeneratedKeys(PreparedStatement ps, int retorno) throws SQLException {
+    protected int returnGeneratedKeys(PreparedStatement ps, int retorno) throws SQLException {
         if (retorno == 0) {
             throw new SQLException("Ocorreu um erro ao criar o registro no banco.");
         }

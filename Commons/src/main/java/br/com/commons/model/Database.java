@@ -1,73 +1,107 @@
-package br.com.configuration.model;
+package br.com.commons.model;
 
-public class Banco {
+import java.util.ArrayList;
+import java.util.List;
 
-    private Integer banco_Id;
-    private String banco_Nome;
-    private Boolean banco_Ativo;
-    private Boolean banco_Principal;
-    private Boolean banco_Driver;
-    private Integer banco_Prioridade;
+public class Database {
 
-    public Banco() {
+    private Integer database_Id;
+    private String database_Name;
+    private Boolean database_Active;
+    private Boolean database_Principal;
+    private String database_Driver;
+    private Integer database_Priority;
+    private List<Configuration> listConfiguration = new ArrayList<>();
+    private List<Identifier> listIdentifier = new ArrayList<>();
+    private List<Database_R_Transaction> listDatabaseRTransaction = new ArrayList<>();
+
+    public Database() {
     }
 
-    public Banco(Integer banco_Id, String banco_Nome, Boolean banco_Ativo, Boolean banco_Principal, Boolean banco_Driver, Integer banco_Prioridade) {
-        this.banco_Id = banco_Id;
-        this.banco_Nome = banco_Nome;
-        this.banco_Ativo = banco_Ativo;
-        this.banco_Principal = banco_Principal;
-        this.banco_Driver = banco_Driver;
-        this.banco_Prioridade = banco_Prioridade;
+    public Database(Integer database_Id, String database_Name, Boolean database_Active, Boolean database_Principal, String database_Driver, Integer database_Priority, List<Configuration> listConfiguration, List<Identifier> listIdentifier, List<Database_R_Transaction> listDatabaseRTransaction) {
+        this.database_Id = database_Id;
+        this.database_Name = database_Name;
+        this.database_Active = database_Active;
+        this.database_Principal = database_Principal;
+        this.database_Driver = database_Driver;
+        this.database_Priority = database_Priority;
+        this.listConfiguration = listConfiguration;
+        this.listIdentifier = listIdentifier;
+        this.listDatabaseRTransaction = listDatabaseRTransaction;
     }
 
-    public Integer getBanco_Id() {
-        return banco_Id;
+    public Integer getDatabase_Id() {
+        return database_Id;
     }
 
-    public void setBanco_Id(Integer banco_Id) {
-        this.banco_Id = banco_Id;
+    public void setDatabase_Id(Integer database_Id) {
+        this.database_Id = database_Id;
     }
 
-    public String getBanco_Nome() {
-        return banco_Nome;
+    public String getDatabase_Name() {
+        return database_Name;
     }
 
-    public void setBanco_Nome(String banco_Nome) {
-        this.banco_Nome = banco_Nome;
+    public void setDatabase_Name(String database_Name) {
+        this.database_Name = database_Name;
     }
 
-    public Boolean getBanco_Ativo() {
-        return banco_Ativo;
+    public Boolean getDatabase_Active() {
+        return database_Active;
     }
 
-    public void setBanco_Ativo(Boolean banco_Ativo) {
-        this.banco_Ativo = banco_Ativo;
+    public void setDatabase_Active(Boolean database_Active) {
+        this.database_Active = database_Active;
     }
 
-    public Boolean getBanco_Principal() {
-        return banco_Principal;
+    public Boolean getDatabase_Principal() {
+        return database_Principal;
     }
 
-    public void setBanco_Principal(Boolean banco_Principal) {
-        this.banco_Principal = banco_Principal;
+    public void setDatabase_Principal(Boolean database_Principal) {
+        this.database_Principal = database_Principal;
     }
 
-    public Boolean getBanco_Driver() {
-        return banco_Driver;
+    public String getDatabase_Driver() {
+        return database_Driver;
     }
 
-    public void setBanco_Driver(Boolean banco_Driver) {
-        this.banco_Driver = banco_Driver;
+    public void setDatabase_Driver(String database_Driver) {
+        this.database_Driver = database_Driver;
     }
 
-    public Integer getBanco_Prioridade() {
-        return banco_Prioridade;
+    public Integer getDatabase_Priority() {
+        return database_Priority;
     }
 
-    public void setBanco_Prioridade(Integer banco_Prioridade) {
-        this.banco_Prioridade = banco_Prioridade;
+    public void setDatabase_Priority(Integer database_Priority) {
+        this.database_Priority = database_Priority;
     }
+
+    public List<Configuration> getListConfiguration() {
+        return listConfiguration;
+    }
+
+    public void setListConfiguration(List<Configuration> listConfiguration) {
+        this.listConfiguration = listConfiguration;
+    }
+
+    public List<Identifier> getListIdentifier() {
+        return listIdentifier;
+    }
+
+    public void setListIdentifier(List<Identifier> listIdentifier) {
+        this.listIdentifier = listIdentifier;
+    }
+
+    public List<Database_R_Transaction> getListDatabaseRTransaction() {
+        return listDatabaseRTransaction;
+    }
+
+    public void setListDatabaseRTransaction(List<Database_R_Transaction> listDatabaseRTransaction) {
+        this.listDatabaseRTransaction = listDatabaseRTransaction;
+    }
+
     
 
 }

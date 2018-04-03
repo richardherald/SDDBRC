@@ -1,64 +1,66 @@
 
-package br.com.configuration.model;
+package br.com.commons.model;
 
 import java.sql.Timestamp;
 
-public class Banco_R_Transacao {
-    private Integer banco_R_Transacao_Id;
-    private Integer transacao_Id;
-    private Integer banco_Id;
-    private Integer sincronizacao_Id;
-    private Timestamp banco_R_Transacao_DataSincronizacao;
+public class Database_R_Transaction {
+    private Integer database_R_Transaction_Id;
+    private Integer transaction_Id;
+    private Integer database_Id;
+    private Integer sincronization_Id;
+    private Timestamp database_R_Transaction_DateSincronization;
 
-    public Banco_R_Transacao() {
+    public Database_R_Transaction() {
     }
 
-    public Banco_R_Transacao(Integer banco_R_Transacao_Id, Integer transacao_Id, Integer banco_Id, Integer sincronizacao_Id, Timestamp banco_R_Transacao_DataSincronizacao) {
-        this.banco_R_Transacao_Id = banco_R_Transacao_Id;
-        this.transacao_Id = transacao_Id;
-        this.banco_Id = banco_Id;
-        this.sincronizacao_Id = sincronizacao_Id;
-        this.banco_R_Transacao_DataSincronizacao = banco_R_Transacao_DataSincronizacao;
+    public Database_R_Transaction(Integer database_R_Transaction_Id, Integer transaction_Id, Integer database_Id, Integer sincronization_Id, Timestamp database_R_Transaction_DateSincronization) {
+        this.database_R_Transaction_Id = database_R_Transaction_Id;
+        this.transaction_Id = transaction_Id;
+        this.database_Id = database_Id;
+        this.sincronization_Id = sincronization_Id;
+        this.database_R_Transaction_DateSincronization = database_R_Transaction_DateSincronization;
     }
 
-    public Integer getBanco_R_Transacao_Id() {
-        return banco_R_Transacao_Id;
+    public Integer getDatabase_R_Transaction_Id() {
+        return database_R_Transaction_Id;
     }
 
-    public void setBanco_R_Transacao_Id(Integer banco_R_Transacao_Id) {
-        this.banco_R_Transacao_Id = banco_R_Transacao_Id;
+    public void setDatabase_R_Transaction_Id(Integer database_R_Transaction_Id) {
+        this.database_R_Transaction_Id = database_R_Transaction_Id;
     }
 
-    public Integer getTransacao_Id() {
-        return transacao_Id;
+    public Integer getTransaction_Id() {
+        return transaction_Id;
     }
 
-    public void setTransacao_Id(Integer transacao_Id) {
-        this.transacao_Id = transacao_Id;
+    public void setTransaction_Id(Integer transaction_Id) {
+        this.transaction_Id = transaction_Id;
     }
 
-    public Integer getBanco_Id() {
-        return banco_Id;
+    public Integer getDatabase_Id() {
+        return database_Id;
     }
 
-    public void setBanco_Id(Integer banco_Id) {
-        this.banco_Id = banco_Id;
+    public void setDatabase_Id(Integer database_Id) {
+        this.database_Id = database_Id;
     }
 
-    public Integer getSincronizacao_Id() {
-        return sincronizacao_Id;
+    public Integer getSincronization_Id() {
+        return sincronization_Id;
     }
 
-    public void setSincronizacao_Id(Integer sincronizacao_Id) {
-        this.sincronizacao_Id = sincronizacao_Id;
+    public void setSincronization_Id(Integer sincronization_Id) {
+        this.sincronization_Id = sincronization_Id;
     }
 
-    public Timestamp getBanco_R_Transacao_DataSincronizacao() {
-        return banco_R_Transacao_DataSincronizacao;
+    public Timestamp getDatabase_R_Transaction_DateSincronization() {
+        return database_R_Transaction_DateSincronization;
     }
 
-    public void setBanco_R_Transacao_DataSincronizacao(Timestamp banco_R_Transacao_DataSincronizacao) {
-        this.banco_R_Transacao_DataSincronizacao = banco_R_Transacao_DataSincronizacao;
+    public void setDatabase_R_Transaction_DateSincronization(Timestamp database_R_Transaction_DateSincronization) {
+        this.database_R_Transaction_DateSincronization = database_R_Transaction_DateSincronization;
     }
+
+
     
 }

@@ -1,7 +1,8 @@
-package br.com.repositorios.config.db;
+package br.com.configuration_impl.db;
 
-import br.com.repositorios.model.Banco;
-import br.com.repositorios.model.ConfigBanco;
+import br.com.configuration.db.ConnectionFactory;
+import br.com.commons.model.Database;
+import br.com.commons.model.Configuration;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import java.util.ArrayList;
@@ -14,28 +15,28 @@ public class ConnectionFactoryImpl implements ConnectionFactory {
 
     protected static Map<Integer, DataSource> poolReplication = new HashMap<>();
     private static DataSource poolMiddleware;
-    private static List<Banco> listDataBases = new ArrayList<>();
+    private static List<Database> listDataBases = new ArrayList<>();
     private static int primaryDataBase;
 
     public ConnectionFactoryImpl() {
     }
 
     @Override
-    public DataSource config(ConfigBanco config) throws Exception {
+    public DataSource config(Configuration config) throws Exception {
         try {
             HikariConfig hikariConfig = new HikariConfig();
-            hikariConfig.setPoolName(config.getConfigBanco_PoolName());
-            hikariConfig.setJdbcUrl(config.getConfigBanco_JdbcUrl());
-            hikariConfig.setUsername(config.getConfigBanco_Username());
-            hikariConfig.setPassword(config.getConfigBanco_PoolName());
-            hikariConfig.setMaximumPoolSize(config.getConfigBanco_MaximumPoolSize());
-            if (config.getConfigBanco_CacheSize() > 0) {
+            hikariConfig.setPoolName(config.getConfiguration_Poolname());
+            hikariConfig.setJdbcUrl(config.getConfiguration_PoolJdbcurl());
+            hikariConfig.setUsername(config.getConfiguration_Username());
+            hikariConfig.setPassword(config.getConfiguration_Password());
+            hikariConfig.setMaximumPoolSize(config.getConfiguration_Maxpoolsize());
+            if (config.getConfiguration_Cachesize() > 0) {
                 hikariConfig.addDataSourceProperty("cachePrepStmts", "true");
-                hikariConfig.addDataSourceProperty("prepStmtCacheSize", config.getConfigBanco_CacheSize());
-                if (config.getConfigBanco_CacheSizeLimit() < config.getConfigBanco_CacheSize()) {
-                    hikariConfig.addDataSourceProperty("prepStmtCacheSqlLimit", config.getConfigBanco_CacheSize());
+                hikariConfig.addDataSourceProperty("prepStmtCacheSize", config.getConfiguration_Cachesize());
+                if (config.getConfiguration_Cachesizelimit() < config.getConfiguration_Cachesize()) {
+                    hikariConfig.addDataSourceProperty("prepStmtCacheSqlLimit", config.getConfiguration_Cachesize());
                 } else {
-                    hikariConfig.addDataSourceProperty("prepStmtCacheSqlLimit", config.getConfigBanco_CacheSizeLimit());
+                    hikariConfig.addDataSourceProperty("prepStmtCacheSqlLimit", config.getConfiguration_Cachesizelimit());
                 }
             }
             return new HikariDataSource(hikariConfig);
@@ -82,11 +83,11 @@ public class ConnectionFactoryImpl implements ConnectionFactory {
         poolMiddleware = aPoolMiddleware;
     }
 
-    public List<Banco> getListDataBases() {
+    public List<Database> getListDataBases() {
         return listDataBases;
     }
 
-    public void setListDataBases(List<Banco> aListDataBases) {
+    public void setListDataBases(List<Database> aListDataBases) {
         listDataBases = aListDataBases;
     }
 }
