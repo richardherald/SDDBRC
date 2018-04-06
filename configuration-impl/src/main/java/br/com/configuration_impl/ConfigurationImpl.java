@@ -12,7 +12,7 @@ import java.util.List;
 public class ConfigurationImpl implements IConfiguration {
 
     @Override
-    public List<Configuration> getByDatabaseId(int databaseId) throws SQLException, Exception {
+    public Configuration getByDatabaseId(int databaseId) throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -22,9 +22,8 @@ public class ConfigurationImpl implements IConfiguration {
             ps = conn.prepareStatement("select * from ConfigBanco where banco_Id = ?");
             ps.setInt(1, databaseId);
             rs = ps.executeQuery();
-            List<Configuration> configurations = new ArrayList<>();
+            Configuration config = new Configuration();
             while (rs.next()) {
-                Configuration config = new Configuration();
                 config.setConfiguration_Id(rs.getInt("configuration_Id"));
                 config.setConfiguration_Poolname(rs.getString("configuration_Poolname"));
                 config.setConfiguration_PoolJdbcurl(rs.getString("configuration_PoolJdbcurl"));
@@ -33,10 +32,9 @@ public class ConfigurationImpl implements IConfiguration {
                 config.setConfiguration_Maxpoolsize(rs.getInt("configuration_Maxpoolsize"));
                 config.setConfiguration_Cachesize(rs.getInt("configuration_Cachesize"));
                 config.setConfiguration_Cachesizelimit(rs.getInt("configuration_Cachesizelimit"));
-                configurations.add(config);
             }
-            return configurations;
-        } catch (Exception e) {
+            return config;
+        } catch (SQLException e) {
             throw e;
         }
     }

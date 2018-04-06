@@ -12,10 +12,10 @@ public class Database extends Datasource {
     private String database_Driver;
     private String database_classDatasource;
     private Integer database_Priority;
-    private List<Configuration> configurations = new ArrayList<>();
+    private Configuration configuration = new Configuration();
     private List<Identifier> identifiers = new ArrayList<>();
     private List<Database_R_Transaction> databaseRTransactions = new ArrayList<>();
-    
+
     public Database() {
     }
 
@@ -128,17 +128,17 @@ public class Database extends Datasource {
     }
 
     /**
-     * @return the configurations
+     * @return the configuration
      */
-    public List<Configuration> getConfigurations() {
-        return configurations;
+    public Configuration getConfiguration() {
+        return configuration;
     }
 
     /**
-     * @param configurations the configurations to set
+     * @param configuration the configuration to set
      */
-    public void setConfigurations(List<Configuration> configurations) {
-        this.configurations = configurations;
+    public void setConfiguration(Configuration configuration) {
+        this.configuration = configuration;
     }
 
     /**
@@ -168,5 +168,7 @@ public class Database extends Datasource {
     public void setDatabaseRTransactions(List<Database_R_Transaction> databaseRTransactions) {
         this.databaseRTransactions = databaseRTransactions;
     }
+
+   
 
 }

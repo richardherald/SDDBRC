@@ -16,7 +16,7 @@ public class PersistenceImpl extends IPersistence {
     private static PersistenceImpl persistenceImpl;
 
     public static PersistenceImpl getInstance() {
-        return persistenceImpl == null ? persistenceImpl = new PersistenceImpl() : persistenceImpl;
+        return getPersistenceImpl() == null ? persistenceImpl = new PersistenceImpl() : getPersistenceImpl();
     }
 
     @Override
@@ -56,10 +56,10 @@ public class PersistenceImpl extends IPersistence {
                 Database database = databases.get(i);
                 String clazz = database.getDatabase_classDatasource();
                 IPersistence configConnection = (PersistenceImpl) Class.forName(clazz).newInstance();
-                DataSource newDatasource = configConnection.createPool(database.getConfigurations().get(0));
+                DataSource newDatasource = configConnection.createPool(database.getConfiguration());
                 databases.get(i).setDatasource(newDatasource);
             }
-            this.POOLS = databases;
+            setPOOLS(databases);
         } catch (Exception e) {
             throw e;
         }
@@ -67,5 +67,33 @@ public class PersistenceImpl extends IPersistence {
 
     public boolean isSelect(String command) {
         return (command.substring(0, 6).contains("SELECT"));
+    }
+
+    /**
+     * @return the POOLS
+     */
+    public static List<Database> getPOOLS() {
+        return POOLS;
+    }
+
+    /**
+     * @param aPOOLS the POOLS to set
+     */
+    public static void setPOOLS(List<Database> aPOOLS) {
+        POOLS = aPOOLS;
+    }
+
+    /**
+     * @return the persistenceImpl
+     */
+    public static PersistenceImpl getPersistenceImpl() {
+        return persistenceImpl;
+    }
+
+    /**
+     * @param aPersistenceImpl the persistenceImpl to set
+     */
+    public static void setPersistenceImpl(PersistenceImpl aPersistenceImpl) {
+        persistenceImpl = aPersistenceImpl;
     }
 }

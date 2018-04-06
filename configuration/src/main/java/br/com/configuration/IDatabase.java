@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface IDatabase {
 
-    public List<Database> getAll();
+    public List<Database> getAll() throws Exception;
 }

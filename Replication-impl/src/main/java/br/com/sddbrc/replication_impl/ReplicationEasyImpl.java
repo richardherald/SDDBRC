@@ -1,20 +1,20 @@
 package br.com.sddbrc.replication_impl;
 
+import br.com.commons.model.Database;
 import br.com.persistence_impl.PersistenceImpl;
 import br.com.replicacao.IReplication;
-import java.util.Map;
-import javax.sql.DataSource;
+import java.util.List;
 
 public class ReplicationEasyImpl extends IReplication {
 
     private final PersistenceImpl persistence = PersistenceImpl.getInstance();
 
     @Override
-    public Object algorithmReplication(Map<Integer, DataSource> datasources, String command) throws Exception {
+    public Object algorithmReplication(List<Database> datasources, String command) throws Exception {
         Object value = new Object();
         try {
-            for (DataSource datasource : datasources.values()) {
-                value = persistence.executeUpdate(datasource.getConnection(),command);
+            for (Database database : datasources) {
+                value = persistence.executeUpdate(database.getDatasource().getConnection(),command);
             }
         } catch (Exception e) {
             throw e;

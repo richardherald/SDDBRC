@@ -5,16 +5,14 @@ import br.com.sddbrc.commons.property.Property;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import br.com.configuration.IConfigurationConnection;
+import br.com.configuration.IDatabase;
+import br.com.configuration.IConfiguration;
 import java.util.List;
 
 public class ConfigurationConnection_DBImpl implements IConfigurationConnection {
 
     private static Database SDDBRC_POOL;
     private static ConfigurationConnection_DBImpl configurationSDDBRC_DBImpl;
-
-    public static List<Database> getListDatabases() {
-        return null;
-    }
 
     public ConfigurationConnection_DBImpl() {
     }
@@ -43,33 +41,34 @@ public class ConfigurationConnection_DBImpl implements IConfigurationConnection 
             throw e;
         }
     }
+    
+    public List<Database> getDatabasesWithConfiguration() throws Exception {
+        try{
+            IDatabase databaseImpl = new DatabaseImpl();
+            IConfiguration configurationImpl = new ConfigurationImpl();
+            List<Database> databases = databaseImpl.getAll();
+            for (int i = 0; i < databases.size(); i++){
+                databases.get(i).setConfiguration(configurationImpl.getByDatabaseId(databases.get(i).getDatabase_Id()));
+            }
+            return databases;
+        }catch(Exception e){
+            throw e;
+        }
+    }
 
-    /**
-     * @return the configurationSDDBRC_DBImpl
-     */
     public static ConfigurationConnection_DBImpl getConfigurationSDDBRC_DBImpl() {
         return configurationSDDBRC_DBImpl;
     }
 
-    /**
-     * @param aConfigurationSDDBRC_DBImpl the configurationSDDBRC_DBImpl to set
-     */
     public static void setConfigurationSDDBRC_DBImpl(ConfigurationConnection_DBImpl aConfigurationSDDBRC_DBImpl) {
         configurationSDDBRC_DBImpl = aConfigurationSDDBRC_DBImpl;
     }
 
-    /**
-     * @return the SDDBRC_POOL
-     */
     public static Database getSDDBRC_POOL() {
         return SDDBRC_POOL;
     }
 
-    /**
-     * @param aSDDBRC_POOL the SDDBRC_POOL to set
-     */
     public static void setSDDBRC_POOL(Database aSDDBRC_POOL) {
         SDDBRC_POOL = aSDDBRC_POOL;
     }
-
 }
