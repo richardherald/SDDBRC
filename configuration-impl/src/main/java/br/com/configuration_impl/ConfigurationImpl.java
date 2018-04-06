@@ -1,7 +1,7 @@
-package br.com.persistence_impl;
+package br.com.configuration_impl;
 
 import br.com.commons.model.Configuration;
-import br.com.persistence.IConfiguration;
+import br.com.configuration.IConfiguration;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConfigurationImpl extends Metodos implements IConfiguration {
+public class ConfigurationImpl implements IConfiguration {
 
     @Override
     public List<Configuration> getByDatabaseId(int databaseId) throws SQLException, Exception {
@@ -17,7 +17,8 @@ public class ConfigurationImpl extends Metodos implements IConfiguration {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            conn = getConnectionMiddleware();
+//            conn = getConnectionMiddleware();
+            conn = null;
             ps = conn.prepareStatement("select * from ConfigBanco where banco_Id = ?");
             ps.setInt(1, databaseId);
             rs = ps.executeQuery();
@@ -37,8 +38,6 @@ public class ConfigurationImpl extends Metodos implements IConfiguration {
             return configurations;
         } catch (Exception e) {
             throw e;
-        } finally {
-            closeConnection(rs, ps, conn);
         }
     }
 }

@@ -1,7 +1,7 @@
-package br.com.persistence_impl;
+package br.com.configuration_impl;
 
 import br.com.commons.model.Database;
-import br.com.persistence.IDatabase;
+import br.com.configuration.IDatabase;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,20 +9,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseImpl extends Metodos implements IDatabase {
-
-    @Override
-    public Database getById(int id) {
-        return null;
-    }
+public class DatabaseImpl implements IDatabase {
 
     @Override
     public List<Database> getAll() throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
-        ResultSet rs = null;
+        ResultSet rs = null; 
         try {
-            conn = getConnectionMiddleware();
+//            conn = getConnectionMiddleware();
+            conn = null;
             ps = conn.prepareStatement("select * from Banco");
             rs = ps.executeQuery();
             List<Database> bancos = new ArrayList<>();
@@ -39,10 +35,8 @@ public class DatabaseImpl extends Metodos implements IDatabase {
             return bancos;
         } catch (SQLException e) {
             throw e;
-        } catch(Exception e){
+        } catch (Exception e) {
             throw e;
-        }finally {
-            closeConnection(rs, ps, conn);
         }
     }
 }

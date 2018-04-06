@@ -23,12 +23,12 @@
             <groupId>br.com.sddbrc.replication-impl</groupId>
             <artifactId>Replication-impl</artifactId>
             <version>1.0</version>
-            <exclusions>
+<!--            <exclusions>
                 <exclusion>
                     <groupId>br.com.sddbrc.replication</groupId>
                     <artifactId>Replication</artifactId>
                 </exclusion>
-            </exclusions>
+            </exclusions>-->
         </dependency>
         <dependency>
             <groupId>br.com.sddbrc.security-impl</groupId>

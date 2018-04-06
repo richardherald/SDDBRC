@@ -8,6 +8,12 @@
     
     <dependencies>
         <dependency>
+            <groupId>br.com.sddbrc.persistence-impl</groupId>
+            <artifactId>Persistence-impl</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope> 
+        </dependency> 
+        <dependency>
             <groupId>br.com.sddbrc.replication</groupId>
             <artifactId>Replication</artifactId>
             <version>1.0</version>

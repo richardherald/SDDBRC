@@ -6,15 +6,17 @@ import java.util.Properties;
 
 public class Property {
 
-    public final static Properties PROPS;
+    public final static Properties DB;
 
     static {
-        PROPS = new Properties();
+        DB = new Properties();
         try {
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            try (InputStream resourceStream = classloader.getResourceAsStream("config.properties")) {
-                PROPS.load(resourceStream);
+            try (InputStream resourceStream = classloader.getResourceAsStream("db.properties")) {
+                DB.load(resourceStream);
             }
+            
+            
         } catch (IOException e) {
 
         }
