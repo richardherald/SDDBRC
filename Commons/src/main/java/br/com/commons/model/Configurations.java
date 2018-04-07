@@ -1,7 +1,7 @@
 
 package br.com.commons.model;
 
-public class Configuration {
+public class Configurations {
     private Integer configuration_Id;
     private String configuration_Username;
     private String configuration_Password;
@@ -11,10 +11,10 @@ public class Configuration {
     private Integer configuration_Cachesize;
     private Integer configuration_Cachesizelimit;
 
-    public Configuration() {
+    public Configurations() {
     }
 
-    public Configuration(Integer configuration_Id, String configuration_Username, String configuration_Password, Integer configuration_Maxpoolsize, Integer configuration_Cachesize, Integer configuration_Cachesizelimit) {
+    public Configurations(Integer configuration_Id, String configuration_Username, String configuration_Password, Integer configuration_Maxpoolsize, Integer configuration_Cachesize, Integer configuration_Cachesizelimit) {
         this.configuration_Id = configuration_Id;
         this.configuration_Username = configuration_Username;
         this.configuration_Password = configuration_Password;

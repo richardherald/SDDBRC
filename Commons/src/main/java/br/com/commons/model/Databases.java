@@ -3,7 +3,7 @@ package br.com.commons.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Database extends Datasource {
+public class Databases extends Datasource {
 
     private Integer database_Id;
     private String database_Name;
@@ -12,14 +12,14 @@ public class Database extends Datasource {
     private String database_Driver;
     private String database_classDatasource;
     private Integer database_Priority;
-    private Configuration configuration = new Configuration();
+    private Configurations configuration = new Configurations();
     private List<Identifier> identifiers = new ArrayList<>();
-    private List<Database_R_Transaction> databaseRTransactions = new ArrayList<>();
+    private List<Databases_R_Transactions> databaseRTransactions = new ArrayList<>();
 
-    public Database() {
+    public Databases() {
     }
 
-    public Database(Integer database_Id, String database_Name, Boolean database_Active, Boolean database_Principal, String database_Driver, String database_classDatasource, Integer database_Priority) {
+    public Databases(Integer database_Id, String database_Name, Boolean database_Active, Boolean database_Principal, String database_Driver, String database_classDatasource, Integer database_Priority) {
         this.database_Id = database_Id;
         this.database_Name = database_Name;
         this.database_Active = database_Active;
@@ -130,14 +130,14 @@ public class Database extends Datasource {
     /**
      * @return the configuration
      */
-    public Configuration getConfiguration() {
+    public Configurations getConfiguration() {
         return configuration;
     }
 
     /**
      * @param configuration the configuration to set
      */
-    public void setConfiguration(Configuration configuration) {
+    public void setConfiguration(Configurations configuration) {
         this.configuration = configuration;
     }
 
@@ -158,14 +158,14 @@ public class Database extends Datasource {
     /**
      * @return the databaseRTransactions
      */
-    public List<Database_R_Transaction> getDatabaseRTransactions() {
+    public List<Databases_R_Transactions> getDatabaseRTransactions() {
         return databaseRTransactions;
     }
 
     /**
      * @param databaseRTransactions the databaseRTransactions to set
      */
-    public void setDatabaseRTransactions(List<Database_R_Transaction> databaseRTransactions) {
+    public void setDatabaseRTransactions(List<Databases_R_Transactions> databaseRTransactions) {
         this.databaseRTransactions = databaseRTransactions;
     }
 

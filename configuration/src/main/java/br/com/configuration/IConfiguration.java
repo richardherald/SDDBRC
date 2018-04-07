@@ -1,8 +1,7 @@
 package br.com.configuration;
 
-import br.com.commons.model.Configuration;
-import java.util.List;
+import br.com.commons.model.Configurations;
 
 public interface IConfiguration {
-     public Configuration getByDatabaseId(int databaseId) throws Exception;
+     public Configurations getByDatabaseId(int databaseId) throws Exception;
 }

@@ -23,12 +23,17 @@
             <groupId>br.com.sddbrc.replication-impl</groupId>
             <artifactId>Replication-impl</artifactId>
             <version>1.0</version>
-<!--            <exclusions>
+            <!--            <exclusions>
                 <exclusion>
                     <groupId>br.com.sddbrc.replication</groupId>
                     <artifactId>Replication</artifactId>
                 </exclusion>
             </exclusions>-->
+        </dependency>
+        <dependency>
+            <groupId>br.com.sddbrc.replication</groupId>
+            <artifactId>Replication</artifactId>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>br.com.sddbrc.security-impl</groupId>
@@ -45,23 +50,33 @@
             <groupId>br.com.sddbrc.persistence-impl</groupId>
             <artifactId>Persistence-impl</artifactId>
             <version>1.0</version>
-            <exclusions>
+            <!--            <exclusions>
                 <exclusion>
                     <groupId>br.com.sddbrc.persistence</groupId>
                     <artifactId>Persistence</artifactId>
                 </exclusion>
-            </exclusions>
+            </exclusions>-->
+        </dependency>
+        <dependency>
+            <groupId>br.com.sddbrc.persistence</groupId>
+            <artifactId>Persistence</artifactId>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>br.com.sddbrc.configuration-impl</groupId>
             <artifactId>configuration-impl</artifactId>
             <version>1.0</version>
-            <exclusions>
+<!--            <exclusions>
                 <exclusion>
                     <groupId>br.com.sddbrc.configuration</groupId>
                     <artifactId>Configuration</artifactId>
                 </exclusion>
-            </exclusions>
+            </exclusions>-->
+        </dependency>
+        <dependency>
+            <groupId>br.com.sddbrc.configuration</groupId>
+            <artifactId>Configuration</artifactId>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>br.com.sddbrc.commons</groupId>

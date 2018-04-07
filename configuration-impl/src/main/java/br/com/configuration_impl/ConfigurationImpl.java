@@ -1,6 +1,6 @@
 package br.com.configuration_impl;
 
-import br.com.commons.model.Configuration;
+import br.com.commons.model.Configurations;
 import br.com.configuration.IConfiguration;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +12,7 @@ import java.util.List;
 public class ConfigurationImpl implements IConfiguration {
 
     @Override
-    public Configuration getByDatabaseId(int databaseId) throws Exception {
+    public Configurations getByDatabaseId(int databaseId) throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -22,7 +22,7 @@ public class ConfigurationImpl implements IConfiguration {
             ps = conn.prepareStatement("select * from ConfigBanco where banco_Id = ?");
             ps.setInt(1, databaseId);
             rs = ps.executeQuery();
-            Configuration config = new Configuration();
+            Configurations config = new Configurations();
             while (rs.next()) {
                 config.setConfiguration_Id(rs.getInt("configuration_Id"));
                 config.setConfiguration_Poolname(rs.getString("configuration_Poolname"));

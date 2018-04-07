@@ -1,29 +1,28 @@
 package br.com.configuration_impl;
 
-import br.com.commons.model.Database;
+import br.com.commons.model.Databases;
 import br.com.configuration.IDatabase;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet; 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseImpl implements IDatabase {
+public class DatabaseImpl extends Util implements IDatabase {
 
     @Override
-    public List<Database> getAll() throws Exception {
+    public List<Databases> getAll() throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
-        ResultSet rs = null; 
+        ResultSet rs = null;
         try {
-//            conn = getConnectionMiddleware();
-            conn = null;
+            conn = getConnection();
             ps = conn.prepareStatement("select * from Banco");
             rs = ps.executeQuery();
-            List<Database> bancos = new ArrayList<>();
+            List<Databases> bancos = new ArrayList<>();
             while (rs.next()) {
-                Database banco = new Database();
+                Databases banco = new Databases();
                 banco.setDatabase_Id(rs.getInt("banco_Id"));
                 banco.setDatabase_Name(rs.getString("banco_Nome"));
                 banco.setDatabase_Principal(rs.getBoolean("banco_Principal"));

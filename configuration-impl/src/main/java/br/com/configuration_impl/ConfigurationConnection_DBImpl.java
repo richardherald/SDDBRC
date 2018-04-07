@@ -1,6 +1,6 @@
 package br.com.configuration_impl;
 
-import br.com.commons.model.Database;
+import br.com.commons.model.Databases;
 import br.com.sddbrc.commons.property.Property;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -11,10 +11,11 @@ import java.util.List;
 
 public class ConfigurationConnection_DBImpl implements IConfigurationConnection {
 
-    private static Database SDDBRC_POOL;
+    private static Databases SDDBRC_POOL;
     private static ConfigurationConnection_DBImpl configurationSDDBRC_DBImpl;
 
     public ConfigurationConnection_DBImpl() {
+        SDDBRC_POOL = new Databases();
     }
 
     public static ConfigurationConnection_DBImpl getInstance() {
@@ -34,7 +35,8 @@ public class ConfigurationConnection_DBImpl implements IConfigurationConnection 
             hikariConfig.addDataSourceProperty("cachePrepStmts", Property.DB.getProperty("cachePrepStmts"));
             hikariConfig.addDataSourceProperty("prepStmtCacheSize", Property.DB.getProperty("prepStmtCacheSize"));
             hikariConfig.addDataSourceProperty("prepStmtCacheSqlLimit", Property.DB.getProperty("prepStmtCacheSqlLimit"));
-            getSDDBRC_POOL().setDatasource(new HikariDataSource(hikariConfig));
+            HikariDataSource datasource = new HikariDataSource(hikariConfig);
+            getSDDBRC_POOL().setDatasource(datasource);
         } catch (NumberFormatException e) {
             throw e;
         } catch (Exception e) {
@@ -42,11 +44,11 @@ public class ConfigurationConnection_DBImpl implements IConfigurationConnection 
         }
     }
     
-    public List<Database> getDatabasesWithConfiguration() throws Exception {
+    public List<Databases> getDatabasesWithConfiguration() throws Exception {
         try{
             IDatabase databaseImpl = new DatabaseImpl();
             IConfiguration configurationImpl = new ConfigurationImpl();
-            List<Database> databases = databaseImpl.getAll();
+            List<Databases> databases = databaseImpl.getAll();
             for (int i = 0; i < databases.size(); i++){
                 databases.get(i).setConfiguration(configurationImpl.getByDatabaseId(databases.get(i).getDatabase_Id()));
             }
@@ -64,11 +66,11 @@ public class ConfigurationConnection_DBImpl implements IConfigurationConnection 
         configurationSDDBRC_DBImpl = aConfigurationSDDBRC_DBImpl;
     }
 
-    public static Database getSDDBRC_POOL() {
+    public static Databases getSDDBRC_POOL() {
         return SDDBRC_POOL;
     }
 
-    public static void setSDDBRC_POOL(Database aSDDBRC_POOL) {
+    public static void setSDDBRC_POOL(Databases aSDDBRC_POOL) {
         SDDBRC_POOL = aSDDBRC_POOL;
     }
 }

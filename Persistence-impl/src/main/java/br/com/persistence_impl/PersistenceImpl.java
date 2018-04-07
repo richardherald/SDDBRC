@@ -1,18 +1,21 @@
 package br.com.persistence_impl;
 
-import br.com.commons.model.Configuration;
-import br.com.commons.model.Database;
+import br.com.commons.model.Configurations;
+import br.com.commons.model.Databases;
 import br.com.persistence.IPersistence;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
 
-public class PersistenceImpl extends IPersistence {
+public class PersistenceImpl extends Util implements IPersistence {
 
-    private static List<Database> POOLS;
+    private static List<Databases> POOLS;
     private static PersistenceImpl persistenceImpl;
 
     public static PersistenceImpl getInstance() {
@@ -20,7 +23,7 @@ public class PersistenceImpl extends IPersistence {
     }
 
     @Override
-    public DataSource createPool(Configuration config) throws Exception {
+    public DataSource createPool(Configurations config) throws Exception {
         try {
             HikariConfig hikariConfig = new HikariConfig();
             hikariConfig.setPoolName(config.getConfiguration_Poolname());
@@ -50,10 +53,10 @@ public class PersistenceImpl extends IPersistence {
     }
 
     @Override
-    public void init(List<Database> databases) throws Exception {
+    public void init(List<Databases> databases) throws Exception {
         try {
             for (int i = 0; i < databases.size(); i++) {
-                Database database = databases.get(i);
+                Databases database = databases.get(i);
                 String clazz = database.getDatabase_classDatasource();
                 IPersistence configConnection = (PersistenceImpl) Class.forName(clazz).newInstance();
                 DataSource newDatasource = configConnection.createPool(database.getConfiguration());
@@ -69,17 +72,51 @@ public class PersistenceImpl extends IPersistence {
         return (command.substring(0, 6).contains("SELECT"));
     }
 
+    public Connection ReturnConnection(List<Databases> databases, int databaseId) throws Exception {
+        try {
+            for (Databases database : databases) {
+                if (database.getDatabase_Id() == databaseId) {
+                    return database.getDatasource().getConnection();
+                }
+            }
+        } catch (SQLException e) {
+            throw e;
+        }
+        return null;
+    }
+
+    public String testConnection() throws Exception {
+        try {
+            String databaseConnectionsValid = "0";
+            for (int i = 0; i < POOLS.size(); i++) {
+                Connection conn = null;
+                PreparedStatement ps = null;
+                ResultSet rs = null;
+                conn = POOLS.get(i).getDatasource().getConnection();
+                ps = conn.prepareStatement("SELECT 1");
+                if (ps.executeQuery().next()) {
+                    databaseConnectionsValid += "," + POOLS.get(i).getDatabase_Id();
+                }
+            }
+            return databaseConnectionsValid;
+        } catch (SQLException e) {
+            throw e;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
     /**
      * @return the POOLS
      */
-    public static List<Database> getPOOLS() {
+    public static List<Databases> getPOOLS() {
         return POOLS;
     }
 
     /**
      * @param aPOOLS the POOLS to set
      */
-    public static void setPOOLS(List<Database> aPOOLS) {
+    public static void setPOOLS(List<Databases> aPOOLS) {
         POOLS = aPOOLS;
     }
 

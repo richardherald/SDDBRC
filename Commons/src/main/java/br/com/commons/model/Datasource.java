@@ -4,7 +4,7 @@ import javax.sql.DataSource;
 
 public class Datasource {
 
-    private DataSource datasource;
+    private DataSource datasource = null;
 
     public DataSource getDatasource() {
         return datasource;

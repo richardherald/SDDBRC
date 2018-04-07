@@ -15,11 +15,7 @@ public class Property {
             try (InputStream resourceStream = classloader.getResourceAsStream("db.properties")) {
                 DB.load(resourceStream);
             }
-            
-            
         } catch (IOException e) {
-
         }
     }
-
 }

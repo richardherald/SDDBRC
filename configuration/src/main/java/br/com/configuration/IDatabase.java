@@ -1,9 +1,9 @@
 package br.com.configuration;
 
-import br.com.commons.model.Database;
+import br.com.commons.model.Databases;
 import java.util.List;
 
 public interface IDatabase {
 
-    public List<Database> getAll() throws Exception;
+    public List<Databases> getAll() throws Exception;
 }
