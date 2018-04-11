@@ -18,17 +18,17 @@ public class DatabaseImpl extends Util implements IDatabase {
         ResultSet rs = null;
         try {
             conn = getConnection();
-            ps = conn.prepareStatement("select * from Banco");
+            ps = conn.prepareStatement("select * from Databases");
             rs = ps.executeQuery();
             List<Databases> bancos = new ArrayList<>();
-            while (rs.next()) {
+            while (rs.next() == true) {
                 Databases banco = new Databases();
-                banco.setDatabase_Id(rs.getInt("banco_Id"));
-                banco.setDatabase_Name(rs.getString("banco_Nome"));
-                banco.setDatabase_Principal(rs.getBoolean("banco_Principal"));
-                banco.setDatabase_Driver(rs.getString("banco_Driver"));
-                banco.setDatabase_Priority(rs.getInt("banco_Prioridade"));
-                banco.setDatabase_Active(rs.getBoolean("banco_Prioridade"));
+                banco.setDatabase_Id(rs.getInt("databases_Id"));
+                banco.setDatabase_Name(rs.getString("databases_Name"));
+                banco.setDatabase_Principal(rs.getBoolean("databases_Principal"));
+                banco.setDatabase_Driver(rs.getString("databases_Driver"));
+                banco.setDatabase_Priority(rs.getInt("databases_Priority"));
+                banco.setDatabase_Active(rs.getBoolean("databases_Active"));
                 bancos.add(banco);
             }
             return bancos;
