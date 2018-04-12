@@ -1,23 +1,23 @@
 package br.com.sddbrc.core;
 
-import br.com.commons.model.Databases;
-import br.com.configuration_impl.ConfigurationConnection_DBImpl;
-import br.com.persistence_impl.PersistenceImpl;
-import br.com.replicacao.IReplication;
+import br.com.sddbrc.commons.model.Databases;
+import br.com.sddbrc.configuration_impl.ConfigurationConnection_DBImpl;
+import br.com.sddbrc.persistence_impl.PersistenceImpl;
 import java.util.List;
 
 public class InitApplication {
 
-    private final String clazz = "ReplicationEasyImpl";
+    private final String clazz = "br.com.sddbrc.ReplicationImpl.ReplicationEasyImpl";
     private PersistenceImpl persistence = PersistenceImpl.getInstance();
     private ConfigurationConnection_DBImpl configurationConnection = ConfigurationConnection_DBImpl.getInstance();
     private static InitApplication init = new InitApplication();
 
     public static void main(String[] args) throws Exception {
         init.startConfiguration();
-        init.starPersistence();
-        init.startReplication();
+        init.startPersistence();
         init.startRuntime();
+        Runtime.getInstance().teste();
+//        init.startReplication();
     }
 
     public void startRuntime() {
@@ -29,12 +29,19 @@ public class InitApplication {
     }
 
     public void startReplication() throws Exception {
-        Runtime.getInstance().setReplicationClass((IReplication) Class.forName(clazz).newInstance());
+//            Runtime.replicationClass = (IReplication) Class.forName(clazz).newInstance();
+//            Runtime.setReplicationClass((ReplicationEasyImpl) Class.forName(clazz).newInstance());
     }
 
-    public void starPersistence() throws Exception {
+    public void startPersistence() throws Exception {
         List<Databases> POOLS = configurationConnection.getDatabasesWithConfiguration();
-        persistence.setPOOLS(POOLS);
-        persistence.init(persistence.getPOOLS());
+        for (Databases database : POOLS){
+            if (database.getDatabase_Principal()){
+                Runtime.setDatasource_Master(database);
+                break;
+            }
+        }
+        PersistenceImpl.setPOOLS(POOLS);
+        persistence.init(PersistenceImpl.getPOOLS());
     }
 }
