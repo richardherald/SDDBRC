@@ -12,4 +12,6 @@ public interface IPersistence {
     public DataSource createPool(Configurations config) throws Exception;
     public int executeUpdate(Connection connection, String command, boolean returnGeneratedKeys) throws Exception;
     public ResultSet executeQuery(Connection connection, String command) throws Exception;
+    public boolean isSelect(String command) throws Exception;
+    public boolean isInsert(String command) throws Exception;
 }

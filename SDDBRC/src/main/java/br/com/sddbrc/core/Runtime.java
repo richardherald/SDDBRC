@@ -26,6 +26,7 @@ public class Runtime {
     private final ConfigurationConnection_DBImpl configConnection = ConfigurationConnection_DBImpl.getInstance();
     private boolean ReplicationIsRun = false;
     private final IdentifierImpl identifier = IdentifierImpl.getInstance();
+
     public static Runtime getInstance() {
         if (runtime == null) {
             runtime = new Runtime();
@@ -34,7 +35,7 @@ public class Runtime {
     }
 
     public void teste() throws Exception {
-        
+
         // SELECT //
         CommandJDBC select = new CommandJDBC();
         select.setQuery("SELECT TOP (10) * FROM [TESTE].[dbo].[Pessoa]");
@@ -43,14 +44,14 @@ public class Runtime {
 
         // INSERT SEM RETORNO DO DO NOVO ID DO REGISTRO //
         CommandJDBC insertSemRetorno = new CommandJDBC();
-        
+
         insertSemRetorno.setQuery("INSERT INTO [TESTE].[dbo].[Pessoa] ([pessoa_Nome] ,[pessoa_Cpf] ,[pessoa_sexo] ,[pessoa_DataNascimento] ,[pessoa_Email]) VALUES ('teste123', '123' ,'M' ,getdate() ,'teste@teste.com.br')");
         insertSemRetorno.setGeneratedKeys(false);
         Runtime.getInstance().execute(insertSemRetorno);
 
         // INSERT COM RETORNO DO DO NOVO ID DO REGISTRO //
         CommandJDBC insertComRetorno = new CommandJDBC();
-                
+
         insertComRetorno.setDML("INSERT");
         insertComRetorno.setQuery("INSERT INTO TESTE.dbo.Pessoa ([pessoa_Nome] ,[pessoa_Cpf] ,[pessoa_sexo] ,[pessoa_DataNascimento] ,[pessoa_Email]) VALUES ('teste123', '123' ,'M' ,getdate() ,'teste@teste.com.br')");
         insertComRetorno.setGeneratedKeys(true);
@@ -88,21 +89,16 @@ public class Runtime {
     }
 
     public Object execute(CommandJDBC command) throws Exception {
+        Util util = new Util();
         if (persistence.isSelect(command.getQuery())) {
             return persistence.executeQuery(getDatasource_Master().getDatasource().getConnection(), command.getQuery());
-//            persistence.executeQueryTest(getDatasource_Master().getDatasource().getConnection(), command.getCommand());
+        } else if (persistence.isInsert(command.getQuery())) {
+            Identifier ident = identifier.getByTable(util.extractTableByQuery(command.getQuery()));
+            command.setQuery(util.concatTableIdOnQuery(command.getQuery(), ident.getIdentifier_NameTableId(), ident.getIdentifier_Value()));
+            return (Object) persistence.executeUpdate(getDatasource_Master().getDatasource().getConnection(), command.getQuery(), command.isGeneratedKeys());
         } else {
-            Util util = new Util();
-            
-           if(util.extractCommandByQuery(command.getQuery()).equalsIgnoreCase("INSERT")){
-           String table = util.extractTableByQuery(command.getQuery());
-           Identifier ident = identifier.getByTable(table);
-           if(ident != null){
-           
-           }
-           }
-
-            Object returnValue = persistence.executeUpdate(getDatasource_Master().getDatasource().getConnection(), command.getQuery(), command.isGeneratedKeys());
+            return (Object) persistence.executeUpdate(getDatasource_Master().getDatasource().getConnection(), command.getQuery(), command.isGeneratedKeys());
+        }
 //            for (int i = 0; i < PersistenceImpl.getPOOLS().size(); i++) {
 //                Databases database = PersistenceImpl.getPOOLS().get(i);
 //                int transactionId = transaction.insert(new Transaction(null, command.getCommand()));
@@ -113,8 +109,6 @@ public class Runtime {
 //                    databaseRtransactionId = databaseRtransaction.insert(new Databases_R_Transactions(null, transactionId, getDatasource_Master().getDatabase_Id(), 0, new Timestamp(System.currentTimeMillis()), null));
 //                }
 //            }
-            return returnValue;
-        }
     }
 
     public static IReplication getReplicationClass() {

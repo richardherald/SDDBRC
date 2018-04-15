@@ -44,7 +44,7 @@ public class PersistenceImpl extends Util implements IPersistence {
     @Override
     public int executeUpdate(Connection connection, String command, boolean generatedKeys) throws Exception {
         try {
-            PreparedStatement ps = connection.prepareStatement(command,generatedKeys ? 1 : 0);
+            PreparedStatement ps = connection.prepareStatement(command, generatedKeys ? 1 : 0);
             int returnValue = ps.executeUpdate();
             return generatedKeys ? returnGeneratedKeys(ps, returnValue) : returnValue;
         } catch (SQLException e) {
@@ -97,8 +97,14 @@ public class PersistenceImpl extends Util implements IPersistence {
         }
     }
 
+    @Override
     public boolean isSelect(String command) {
         return (command.substring(0, 6).contains("SELECT"));
+    }
+
+    @Override
+    public boolean isInsert(String command) {
+        return (command.substring(0, 6).contains("INSERT"));
     }
 
     public Connection ReturnConnection(List<Databases> databases, int databaseId) throws Exception {

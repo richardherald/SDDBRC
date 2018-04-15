@@ -45,7 +45,7 @@ public class IdentifierImpl extends Util implements IIdentifier {
         ResultSet rs = null;
         try {
             conn = getConnection();
-            ps = conn.prepareStatement("select * from Identifier where identifier_Table = ?");
+            ps = conn.prepareStatement("select * from Identifier where identifier_Table like ?");
             ps.setString(1, table);
             rs = ps.executeQuery();
             Identifier identifier = null;

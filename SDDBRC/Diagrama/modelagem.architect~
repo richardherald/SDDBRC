@@ -40,7 +40,7 @@
     <folder id="FOLTAB12" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
     <folder id="FOLTAB14" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX9" populated="true" UUID="9cc2e3f1-dc01-4eec-bd9b-cdac641f0bca" clustered="false" name="databases_Id" physicalName="database_Id" primaryKeyIndex="true" unique="false" >
+    <index id="IDX9" populated="true" UUID="9cc2e3f1-dc01-4eec-bd9b-cdac641f0bca" clustered="false" name="databases_Id" physicalName="databases_Id" primaryKeyIndex="true" unique="false" >
      <index-column id="IDC10" populated="true" UUID="d0a0d820-7bd9-4f04-89ef-03f0c1a7a6f2" ascendingOrDescending="UNSPECIFIED" column-ref="COL2" name="databases_Id" physicalName="databases_Id" />
     </index>
    </folder>
@@ -60,7 +60,7 @@
     <folder id="FOLTAB112" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
     <folder id="FOLTAB114" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX14" populated="true" UUID="f30ba419-0f54-4269-9970-83a7e10003eb" clustered="false" name="transacations_Id" physicalName="transacation_Id" primaryKeyIndex="true" unique="false" >
+    <index id="IDX14" populated="true" UUID="f30ba419-0f54-4269-9970-83a7e10003eb" clustered="false" name="transacations_Id" physicalName="transacations_Id" primaryKeyIndex="true" unique="false" >
      <index-column id="IDC15" populated="true" UUID="a5506764-bfb4-4600-931f-810470126821" ascendingOrDescending="UNSPECIFIED" column-ref="COL12" name="transactions_Id" physicalName="transactions_Id" />
     </index>
    </folder>
@@ -121,7 +121,7 @@
     <folder id="FOLTAB212" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
     <folder id="FOLTAB214" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX31" populated="true" UUID="22e395be-8122-4217-b3a5-34e75eecebda" clustered="false" name="configurations_Id" physicalName="configuration_Id" primaryKeyIndex="true" unique="false" >
+    <index id="IDX31" populated="true" UUID="22e395be-8122-4217-b3a5-34e75eecebda" clustered="false" name="configurations_Id" physicalName="configurations_Id" primaryKeyIndex="true" unique="false" >
      <index-column id="IDC32" populated="true" UUID="d945829d-3315-4c9b-8a62-2c36b884b39c" ascendingOrDescending="UNSPECIFIED" column-ref="COL22" name="configuration_Id" physicalName="configuration_Id" />
     </index>
    </folder>
@@ -150,7 +150,7 @@
     <folder id="FOLTAB332" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
     <folder id="FOLTAB334" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX39" populated="true" UUID="57b184d1-63af-44f5-afc1-ebbf87f61d70" clustered="false" name="databases_R_Transactions_Id" physicalName="database_R_Transaction_Id" primaryKeyIndex="true" unique="false" >
+    <index id="IDX39" populated="true" UUID="57b184d1-63af-44f5-afc1-ebbf87f61d70" clustered="false" name="databases_R_Transactions_Id" physicalName="databases_R_Transactions_Id" primaryKeyIndex="true" unique="false" >
      <index-column id="IDC40" populated="true" UUID="bff2364f-efc9-44b1-96e8-006fa655effd" ascendingOrDescending="UNSPECIFIED" column-ref="COL34" name="databases_R_Transaction_Id" physicalName="databases_R_Transaction_Id" />
     </index>
    </folder>
