@@ -21,7 +21,7 @@ public class ReplicationEasyImpl extends IReplication {
                     databaseId = transactions.get(i).getDatabase_Id();
                     conn = persistence.ReturnConnection(datasources, databaseId);
                 }
-                persistence.executeUpdate(conn, transactions.get(i).getTransaction().getTransaction_Script());
+                persistence.executeUpdate(conn, transactions.get(i).getTransaction().getTransaction_Script(),true);
             }
         } catch (Exception e) {
             throw e;
