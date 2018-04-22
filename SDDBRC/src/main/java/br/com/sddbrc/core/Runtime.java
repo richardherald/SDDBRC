@@ -91,7 +91,7 @@ public class Runtime {
     public Object execute(CommandJDBC command) throws Exception {
         Util util = new Util();
         if (persistence.isSelect(command.getQuery())) {
-            return persistence.executeQuery(getDatasource_Master().getDatasource().getConnection(), command.getQuery());
+            return persistence.executeQuery(command.getCon(), command.getQuery());
         } else if (persistence.isInsert(command.getQuery())) {
             Identifier ident = identifier.getByTable(util.extractTableByQuery(command.getQuery()));
             command.setQuery(util.concatTableIdOnQuery(command.getQuery(), ident.getIdentifier_NameTableId(), ident.getIdentifier_Value()));

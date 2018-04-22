@@ -1,10 +1,14 @@
 package br.com.sddbrc.commons.model;
 
+import java.sql.Connection;
+
 public class CommandJDBC {
 
     private String query;
     private boolean generatedKeys;
     private String DML;
+    private Connection con;
+    private boolean beginTransaction=false;
 
     public CommandJDBC() {
     }
@@ -37,6 +41,34 @@ public class CommandJDBC {
 
     public void setDML(String DML) {
         this.DML = DML;
+    }
+
+    /**
+     * @return the con
+     */
+    public Connection getCon() {
+        return con;
+    }
+
+    /**
+     * @param con the con to set
+     */
+    public void setCon(Connection con) {
+        this.con = con;
+    }
+
+    /**
+     * @return the beginTransaction
+     */
+    public boolean isBeginTransaction() {
+        return beginTransaction;
+    }
+
+    /**
+     * @param beginTransaction the beginTransaction to set
+     */
+    public void setBeginTransaction(boolean beginTransaction) {
+        this.beginTransaction = beginTransaction;
     }
 
 }

@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 
 public class PersistenceImpl extends Util implements IPersistence {
 
+    // criar uma classe abstrata para colocar as variaveis que nunca vao mudar
     private static List<Databases> POOLS;
     private static PersistenceImpl persistenceImpl;
 
@@ -81,11 +82,19 @@ public class PersistenceImpl extends Util implements IPersistence {
         }
     }
 
+    /**
+     * Metodo responsavel por instanciar o pool de conexões baseado no nome da classe
+     * @param databases
+     * @throws Exception 
+     */
     @Override
     public void init(List<Databases> databases) throws Exception {
         try {
             for (int i = 0; i < databases.size(); i++) {
                 Databases database = databases.get(i);
+                if (database.getDatabase_Principal()){
+                    
+                }
                 String clazz = database.getDatabase_ClassDatasource();
                 IPersistence configConnection = (PersistenceImpl) Class.forName(clazz).newInstance();
                 DataSource newDatasource = configConnection.createPool(database.getConfiguration());
