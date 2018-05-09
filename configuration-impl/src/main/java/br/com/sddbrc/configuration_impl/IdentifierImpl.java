@@ -1,22 +1,13 @@
 package br.com.sddbrc.configuration_impl;
 
-import br.com.sddbrc.commons.model.Databases;
 import br.com.sddbrc.commons.model.Identifier;
 import br.com.sddbrc.configuration.IIdentifier;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class IdentifierImpl extends Util implements IIdentifier {
-
-    private static IdentifierImpl identifierImpl;
-
-    public static IdentifierImpl getInstance() {
-        return getIdentifierImpl() == null ? new IdentifierImpl() : identifierImpl;
-    }
 
     @Override
     public int insert(Identifier identifier) throws Exception {
@@ -81,14 +72,6 @@ public class IdentifierImpl extends Util implements IIdentifier {
         } finally {
             closeConnection(null, ps, conn);
         }
-    }
-
-    public static IdentifierImpl getIdentifierImpl() {
-        return identifierImpl;
-    }
-
-    public static void setIdentifierImpl(IdentifierImpl identifierImpl) {
-        IdentifierImpl.identifierImpl = identifierImpl;
     }
 
 }

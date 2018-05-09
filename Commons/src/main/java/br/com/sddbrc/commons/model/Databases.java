@@ -16,19 +16,6 @@ public class Databases extends Datasource {
     private List<Identifier> identifiers = new ArrayList<>();
     private List<Databases_R_Transactions> databaseRTransactions = new ArrayList<>();
 
-    public Databases() {
-    }
-
-    public Databases(Integer database_Id, String database_Name, Boolean database_Active, Boolean database_Principal, String database_Driver, String database_classDatasource, Integer database_Priority) {
-        this.database_Id = database_Id;
-        this.database_Name = database_Name;
-        this.database_Active = database_Active;
-        this.database_Principal = database_Principal;
-        this.database_Driver = database_Driver;
-        this.database_ClassDatasource = database_classDatasource;
-        this.database_Priority = database_Priority;
-    }
-
     /**
      * @return the database_Id
      */

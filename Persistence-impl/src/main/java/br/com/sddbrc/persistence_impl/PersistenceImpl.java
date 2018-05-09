@@ -9,18 +9,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
 
 public class PersistenceImpl extends Util implements IPersistence {
 
     // criar uma classe abstrata para colocar as variaveis que nunca vao mudar
-    private static List<Databases> POOLS;
-    private static PersistenceImpl persistenceImpl;
-
-    public static PersistenceImpl getInstance() {
-        return getPersistenceImpl() == null ? persistenceImpl = new PersistenceImpl() : getPersistenceImpl();
-    }
+    private static List<Databases> POOLS = new ArrayList<>();
+    private static Databases POLL_MASTER = new Databases();
 
     @Override
     public DataSource createPool(Configurations config) throws Exception {
@@ -83,17 +80,19 @@ public class PersistenceImpl extends Util implements IPersistence {
     }
 
     /**
-     * Metodo responsavel por instanciar o pool de conexões baseado no nome da classe
+     * Metodo responsavel por instanciar o pool de conexões baseado no nome da
+     * classe
+     *
      * @param databases
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public void init(List<Databases> databases) throws Exception {
         try {
             for (int i = 0; i < databases.size(); i++) {
                 Databases database = databases.get(i);
-                if (database.getDatabase_Principal()){
-                    
+                if (database.getDatabase_Principal()) {
+                    setPOLL_MASTER(database);
                 }
                 String clazz = database.getDatabase_ClassDatasource();
                 IPersistence configConnection = (PersistenceImpl) Class.forName(clazz).newInstance();
@@ -132,14 +131,14 @@ public class PersistenceImpl extends Util implements IPersistence {
     public String testConnection() throws Exception {
         try {
             String databaseConnectionsValid = "0";
-            for (int i = 0; i < POOLS.size(); i++) {
+            for (int i = 0; i < getPOOLS().size(); i++) {
                 Connection conn = null;
                 PreparedStatement ps = null;
                 ResultSet rs = null;
-                conn = POOLS.get(i).getDatasource().getConnection();
+                conn = getPOOLS().get(i).getDatasource().getConnection();
                 ps = conn.prepareStatement("SELECT 1");
                 if (ps.executeQuery().next()) {
-                    databaseConnectionsValid += "," + POOLS.get(i).getDatabase_Id();
+                    databaseConnectionsValid += "," + getPOOLS().get(i).getDatabase_Id();
                 }
             }
             return databaseConnectionsValid;
@@ -150,19 +149,31 @@ public class PersistenceImpl extends Util implements IPersistence {
         }
     }
 
-    public static List<Databases> getPOOLS() {
+    /**
+     * @return the POOLS
+     */
+    public List<Databases> getPOOLS() {
         return POOLS;
     }
 
-    public static void setPOOLS(List<Databases> aPOOLS) {
+    /**
+     * @param aPOOLS the POOLS to set
+     */
+    public void setPOOLS(List<Databases> aPOOLS) {
         POOLS = aPOOLS;
     }
 
-    public static PersistenceImpl getPersistenceImpl() {
-        return persistenceImpl;
+    /**
+     * @return the POLL_MASTER
+     */
+    public Databases getPOLL_MASTER() {
+        return POLL_MASTER;
     }
 
-    public static void setPersistenceImpl(PersistenceImpl aPersistenceImpl) {
-        persistenceImpl = aPersistenceImpl;
+    /**
+     * @param aPOLL_MASTER the POLL_MASTER to set
+     */
+    public void setPOLL_MASTER(Databases aPOLL_MASTER) {
+        POLL_MASTER = aPOLL_MASTER;
     }
 }
