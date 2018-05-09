@@ -49,6 +49,7 @@ public class ConfigurationConnection_DBImpl implements IConfigurationConnection 
             ConfigurationImpl configurationImpl = new ConfigurationImpl();
             List<Databases> databases = databaseImpl.getAll();
             for (int i = 0; i < databases.size(); i++){
+                // se acontecer algum erro: parar tudo ou usar o que subir
                 databases.get(i).setConfiguration(configurationImpl.getByDatabaseId(databases.get(i).getDatabase_Id()));
             }
             return databases;

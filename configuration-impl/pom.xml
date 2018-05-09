@@ -8,13 +8,19 @@
     <dependencies>
         <dependency>
             <groupId>br.com.sddbrc.configuration</groupId>
-            <artifactId>Configuration</artifactId>
+            <artifactId>configuration</artifactId>
             <version>1.0</version>
             <scope>compile</scope> 
         </dependency>
         <dependency>
             <groupId>br.com.sddbrc</groupId>
             <artifactId>SDDBRC</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope> 
+        </dependency>
+        <dependency>
+            <groupId>br.com.sddbrc.commons</groupId>
+            <artifactId>Commons</artifactId>
             <version>1.0</version>
             <scope>compile</scope> 
         </dependency>
