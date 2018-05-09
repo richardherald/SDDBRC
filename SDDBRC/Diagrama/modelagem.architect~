@@ -167,7 +167,7 @@
     <column id="COL44" populated="true" UUID="77594fd5-5bc7-4faf-a921-5575e820d6d1" autoIncrement="false" autoIncrementSequenceName="Identifier_identifier_Value_seq" defaultValue="" name="identifier_Value" nullable="0" physicalName="identifier_Value" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
-    <column id="COL45" populated="true" UUID="390eed56-9657-4320-a5a6-5f15c161169d" autoIncrement="false" autoIncrementSequenceName="Banco_banco_Id_seq_3" defaultValue="" name="databases_Id" nullable="0" physicalName="databases_Id" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL45" populated="true" UUID="4e6259b2-90ab-47da-8fad-20a692a4c4f8" autoIncrement="false" autoIncrementSequenceName="Identifier_identifier_TableId_seq" defaultValue="" name="identifier_TableId" nullable="0" physicalName="identifier_TableId" precision="255" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     </folder>
@@ -185,21 +185,18 @@
    <relationship id="REL48" populated="true" UUID="71b679fc-7d48-4e69-9fc4-b9d30f798846" deferrability="7" deleteRule="3" fk-table-ref="TAB33" fkCardinality="7" identifying="false" name="Banco_Banco_R_Transacao_fk" physicalName="Banco_Banco_R_Transacao_fk" pk-table-ref="TAB1" pkCardinality="2" updateRule="3" >
     <column-mapping id="CMP49" populated="true" UUID="e65350b6-e399-49f0-aeb1-b2300e36b1b2" fk-column-ref="COL36" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL2" />
    </relationship>
-   <relationship id="REL50" populated="true" UUID="8474a3ca-1dd7-46ae-a4be-acbd79f0769b" deferrability="7" deleteRule="3" fk-table-ref="TAB41" fkCardinality="7" identifying="false" name="Banco_Identificador_fk" physicalName="Banco_Identificador_fk" pk-table-ref="TAB1" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP51" populated="true" UUID="bd4c11a9-05ed-4949-a967-b6fb8a6a05e8" fk-column-ref="COL45" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL2" />
+   <relationship id="REL50" populated="true" UUID="23a4327a-f708-4bad-94c6-4e9673b4d62d" deferrability="7" deleteRule="3" fk-table-ref="TAB21" fkCardinality="7" identifying="false" name="Banco_ConfigBanco_fk" physicalName="Banco_ConfigBanco_fk" pk-table-ref="TAB1" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP51" populated="true" UUID="ae3840f0-77be-45f8-824a-c909876e53f5" fk-column-ref="COL30" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL2" />
    </relationship>
-   <relationship id="REL52" populated="true" UUID="23a4327a-f708-4bad-94c6-4e9673b4d62d" deferrability="7" deleteRule="3" fk-table-ref="TAB21" fkCardinality="7" identifying="false" name="Banco_ConfigBanco_fk" physicalName="Banco_ConfigBanco_fk" pk-table-ref="TAB1" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP53" populated="true" UUID="ae3840f0-77be-45f8-824a-c909876e53f5" fk-column-ref="COL30" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL2" />
+   <relationship id="REL52" populated="true" UUID="b9c2ef29-7b0c-4485-b3cd-a423fdf2b871" deferrability="7" deleteRule="3" fk-table-ref="TAB33" fkCardinality="7" identifying="false" name="Transacao_Banco_R_Transacao_fk" physicalName="Transacao_Banco_R_Transacao_fk" pk-table-ref="TAB11" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP53" populated="true" UUID="9a376c46-e906-4ff6-a83c-1b97543e431f" fk-column-ref="COL35" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL12" />
    </relationship>
-   <relationship id="REL54" populated="true" UUID="b9c2ef29-7b0c-4485-b3cd-a423fdf2b871" deferrability="7" deleteRule="3" fk-table-ref="TAB33" fkCardinality="7" identifying="false" name="Transacao_Banco_R_Transacao_fk" physicalName="Transacao_Banco_R_Transacao_fk" pk-table-ref="TAB11" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP55" populated="true" UUID="9a376c46-e906-4ff6-a83c-1b97543e431f" fk-column-ref="COL35" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL12" />
-   </relationship>
-   <relationship id="REL56" populated="true" UUID="31e784b6-ad27-40a3-bf3f-6fe0fb55c128" deferrability="7" deleteRule="3" fk-table-ref="TAB33" fkCardinality="7" identifying="false" name="Sincronizacao_Banco_R_Transacao_fk" physicalName="Sincronizacao_Banco_R_Transacao_fk" pk-table-ref="TAB16" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP57" populated="true" UUID="5c021a00-a6fc-4e26-8acd-6d1e96fb3bfd" fk-column-ref="COL37" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL17" />
+   <relationship id="REL54" populated="true" UUID="31e784b6-ad27-40a3-bf3f-6fe0fb55c128" deferrability="7" deleteRule="3" fk-table-ref="TAB33" fkCardinality="7" identifying="false" name="Sincronizacao_Banco_R_Transacao_fk" physicalName="Sincronizacao_Banco_R_Transacao_fk" pk-table-ref="TAB16" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP55" populated="true" UUID="5c021a00-a6fc-4e26-8acd-6d1e96fb3bfd" fk-column-ref="COL37" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL17" />
    </relationship>
   </relationships>
  </target-database>
- <ddl-generator type="ca.sqlpower.architect.ddl.SQLServer2005DDLGenerator" allow-connection="false"> </ddl-generator>
+ <ddl-generator type="ca.sqlpower.architect.ddl.SQLServer2005DDLGenerator" allow-connection="true"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
  <play-pen zoom="0.9999999999999998" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
@@ -208,12 +205,11 @@
   <table-pane table-ref="TAB16" x="1062" y="347" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB21" x="150" y="556" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB33" x="637" y="324" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
-  <table-pane table-ref="TAB41" x="176" y="110" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
-  <table-link relationship-ref="REL54" pkConnection="0.4978723404255319" fkConnection="0.44876325088339225" rLineColor="0x555555" pkLabelText="" fkLabelText="" orientation="132"/>
+  <table-pane table-ref="TAB41" x="177" y="112" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-link relationship-ref="REL52" pkConnection="0.4978723404255319" fkConnection="0.44876325088339225" rLineColor="0x555555" pkLabelText="" fkLabelText="" orientation="132"/>
   <table-link relationship-ref="REL48" pkConnection="0.4094488188976378" fkConnection="0.494949494949495" rLineColor="0x555555" pkLabelText="" fkLabelText="" orientation="33"/>
-  <table-link relationship-ref="REL56" pkConnection="0.49122807017543857" fkConnection="0.5151515151515151" rLineColor="0x555555" pkLabelText="" fkLabelText="" orientation="18"/>
-  <table-link relationship-ref="REL50" pkConnection="0.41025641025641024" fkConnection="0.5" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="72"/>
-  <table-link relationship-ref="REL52" pkConnection="0.42857142857142855" fkConnection="0.5444015444015444" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="132"/>
+  <table-link relationship-ref="REL54" pkConnection="0.49122807017543857" fkConnection="0.5151515151515151" rLineColor="0x555555" pkLabelText="" fkLabelText="" orientation="18"/>
+  <table-link relationship-ref="REL50" pkConnection="0.42857142857142855" fkConnection="0.5444015444015444" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="132"/>
  </play-pen>
  <critic-manager>
   <critic-grouping platformType="Generic" enabled="true">
