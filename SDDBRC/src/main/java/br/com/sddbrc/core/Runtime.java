@@ -1,7 +1,6 @@
 package br.com.sddbrc.core;
 
 import br.com.sddbrc.commons.model.CommandJDBC;
-import br.com.sddbrc.configuration_impl.Util;
 import br.com.sddbrc.configuration_impl.ConfigurationConnection_DBImpl;
 import br.com.sddbrc.configuration_impl.DatabaseRTransactionImpl;
 import br.com.sddbrc.configuration_impl.IdentifierImpl;
@@ -24,18 +23,23 @@ public class Runtime {
     private boolean ReplicationIsRun = false;
 
     public Object execute(CommandJDBC command) throws Exception {
-        Util util = new Util();
-        if (persistence.isSelect(command.getQuery())) {
-            Object object = persistence.executeQuery(command.getCon(), command.getQuery());
-            return object;
-        } else if (persistence.isInsert(command.getQuery())) {
+        try {
+            Object object = null;
+            if (persistence.isSelect(command.getQuery())) {
+                object = persistence.executeQuery(command.getCon(), command.getQuery());
+            } else if (persistence.isInsert(command.getQuery())) {
 //            Identifier ident = identifier.getByTable(util.extractTableByQuery(command.getQuery()));
 //            command.setQuery(util.concatTableIdOnQuery(command.getQuery(), ident.getIdentifier_NameTableId(), ident.getIdentifier_Value()));
 //            return persistence.executeUpdate(persistence.getPOLL_MASTER().getDatasource().getConnection(), command.getQuery(), command.isGeneratedKeys());
-            return persistence.executeUpdate(command.getCon(), command.getQuery(), command.isGeneratedKeys());
-        } else {
-            return persistence.executeUpdate(command.getCon(), command.getQuery(), command.isGeneratedKeys());
+                object = persistence.executeUpdate(command.getCon(), command.getQuery(), command.isGeneratedKeys());
+            }
+        } catch (Exception e) {
+            throw e;
         }
+
+//        else {
+//            return persistence.executeUpdate(command.getCon(), command.getQuery(), command.isGeneratedKeys());
+//        }
 //            for (int i = 0; i < PersistenceImpl.getPOOLS().size(); i++) {
 //                Databases database = PersistenceImpl.getPOOLS().get(i);
 //                int transactionId = transaction.insert(new Transaction(null, command.getCommand()));
