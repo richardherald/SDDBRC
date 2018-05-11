@@ -1,26 +1,38 @@
 package br.com.sddbrc.core;
 
 import br.com.sddbrc.commons.model.CommandJDBC;
-import br.com.sddbrc.configuration_impl.ConfigurationConnection_DBImpl;
+import br.com.sddbrc.commons.model.Databases;
+import br.com.sddbrc.commons.model.Databases_R_Transactions;
 import br.com.sddbrc.configuration_impl.DatabaseRTransactionImpl;
-import br.com.sddbrc.configuration_impl.IdentifierImpl;
-import br.com.sddbrc.configuration_impl.TransactionImpl;
-import br.com.sddbrc.connection_impl.ConnectionImpl;
 import br.com.sddbrc.persistence_impl.PersistenceImpl;
 import br.com.sddbrc.replication.IReplication;
+import java.util.List;
 
 public class Runtime {
 
-    protected IReplication replicationClass;
-
-    private ConfigurationConnection_DBImpl configConnection = new ConfigurationConnection_DBImpl();
-    private DatabaseRTransactionImpl databaseRtransaction = new DatabaseRTransactionImpl();
-    private final PersistenceImpl persistence = new PersistenceImpl();
-    private IdentifierImpl identifier = new IdentifierImpl();
-    private TransactionImpl transaction = new TransactionImpl();
-    private ConnectionImpl connectionImpl = new ConnectionImpl();
-
+    private IReplication replicationClass;
+    private PersistenceImpl persistence = new PersistenceImpl();
+    private DatabaseRTransactionImpl transactions = new DatabaseRTransactionImpl();
     private boolean ReplicationIsRun = false;
+
+    public void ThreadReplication() throws Exception {
+        try {
+            while (true) {
+                if (!ReplicationIsRun) {
+                    List<Databases> databases = persistence.ListDatabaseActiveForReplication();
+                    String databasesId = "0";
+                    for (Databases database : databases) {
+                        databasesId += "," + database.getDatabase_Id();
+                    }
+                    List<Databases_R_Transactions> ListOfTransactions = transactions.getAllTransactionsWhereSincronizationIsFalse(databasesId);
+                    replicationClass.algorithmReplication(databases, ListOfTransactions);
+                }
+                Thread.sleep(2000);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 
     public Object execute(CommandJDBC command) throws Exception {
         try {
@@ -28,28 +40,12 @@ public class Runtime {
             if (persistence.isSelect(command.getQuery())) {
                 object = persistence.executeQuery(command.getCon(), command.getQuery());
             } else if (persistence.isInsert(command.getQuery())) {
-//            Identifier ident = identifier.getByTable(util.extractTableByQuery(command.getQuery()));
-//            command.setQuery(util.concatTableIdOnQuery(command.getQuery(), ident.getIdentifier_NameTableId(), ident.getIdentifier_Value()));
-//            return persistence.executeUpdate(persistence.getPOLL_MASTER().getDatasource().getConnection(), command.getQuery(), command.isGeneratedKeys());
                 object = persistence.executeUpdate(command.getCon(), command.getQuery(), command.isGeneratedKeys());
             }
+            return object;
         } catch (Exception e) {
             throw e;
         }
-
-//        else {
-//            return persistence.executeUpdate(command.getCon(), command.getQuery(), command.isGeneratedKeys());
-//        }
-//            for (int i = 0; i < PersistenceImpl.getPOOLS().size(); i++) {
-//                Databases database = PersistenceImpl.getPOOLS().get(i);
-//                int transactionId = transaction.insert(new Transaction(null, command.getCommand()));
-//                int databaseRtransactionId;
-//                if (database.getDatabase_Principal()) {
-//                    databaseRtransactionId = databaseRtransaction.insert(new Databases_R_Transactions(null, transactionId, getDatasource_Master().getDatabase_Id(), 1, new Timestamp(System.currentTimeMillis()), null));
-//                } else {
-//                    databaseRtransactionId = databaseRtransaction.insert(new Databases_R_Transactions(null, transactionId, getDatasource_Master().getDatabase_Id(), 0, new Timestamp(System.currentTimeMillis()), null));
-//                }
-//            }
     }
 
     public IReplication getReplicationClass() {
