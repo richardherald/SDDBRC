@@ -11,6 +11,61 @@
             <artifactId>Security</artifactId>
             <version>1.0</version>
             <scope>compile</scope> 
+            <exclusions>
+                <exclusion>
+                    <groupId>br.com.sddbrc.commons</groupId>
+                    <artifactId>Commons</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>br.com.sddbrc.commons</groupId>
+            <artifactId>Commons</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>br.com.sddbrc</groupId>
+            <artifactId>SDDBRC</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope> 
+            <exclusions>
+                <exclusion>
+                    <groupId>br.com.sddbrc.connection</groupId>
+                    <artifactId>Connection</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>br.com.sddbrc.connection-impl</groupId>
+                    <artifactId>Connection-impl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>br.com.sddbrc.security-impl</groupId>
+                    <artifactId>Security-impl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>br.com.sddbrc.replication-impl</groupId>
+                    <artifactId>Replication-impl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>br.com.sddbrc.commons</groupId>
+                    <artifactId>Commons</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>br.com.sddbrc.configuration-impl</groupId>
+                    <artifactId>configuration-impl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>br.com.sddbrc.configuration-impl</groupId>
+                    <artifactId>configuration-impl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>br.com.sddbrc.persistence-impl</groupId>
+                    <artifactId>Persistence-impl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>br.com.sddbrc.persistence</groupId>
+                    <artifactId>Persistence</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
     <properties>
