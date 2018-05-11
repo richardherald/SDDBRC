@@ -8,19 +8,11 @@ import br.com.sddbrc.replication.IReplication;
 public class InitApplication {
 
     private final String clazz = "br.com.sddbrc.replicationImpl.ReplicationEasyImpl";
-    private PersistenceImpl persistence;
-    private ConfigurationConnection_DBImpl configurationConnection;
-    private Runtime runtime;
-    private ConnectionImpl connection;
-    private static InitApplication initApplication;
-
-    public InitApplication() {
-        persistence = new PersistenceImpl();
-        configurationConnection = new ConfigurationConnection_DBImpl();
-        runtime = new Runtime();
-        initApplication = new InitApplication();
-        connection = new ConnectionImpl();
-    }
+    private PersistenceImpl persistence = new PersistenceImpl();
+    private ConfigurationConnection_DBImpl configurationConnection = new ConfigurationConnection_DBImpl();
+    private Runtime runtime = new Runtime();
+    private ConnectionImpl connection = new ConnectionImpl();
+    private static InitApplication initApplication = new InitApplication();
 
     public static void main(String[] args) throws Exception {
         initApplication.startConfiguration();
@@ -38,7 +30,7 @@ public class InitApplication {
     }
 
     public void startReplication() throws Exception {
-        runtime.replicationClass = (IReplication) Class.forName(clazz).newInstance();
+        runtime.setReplicationClass((IReplication) Class.forName(clazz).newInstance());
     }
 
     public void startPersistence() throws Exception {
