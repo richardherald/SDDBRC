@@ -7,7 +7,7 @@ import br.com.sddbrc.persistence_impl.PersistenceImpl;
 import br.com.sddbrc.replication.IReplication;
 import java.util.List;
 
-public class ReplicationPrimayCopyAsynchronousImpl extends IReplication {
+public class ReplicationPrimaryCopyAsynchronousImpl extends IReplication {
 
     private PersistenceImpl persistence = new PersistenceImpl();
     private br.com.sddbrc.core.Runtime runtime = new br.com.sddbrc.core.Runtime();
