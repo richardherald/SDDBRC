@@ -1,8 +1,9 @@
 package br.com.sddbrc.commons.model;
 
+import java.io.Serializable;
 import java.sql.Connection;
 
-public class CommandJDBC {
+public class CommandJDBC implements Serializable{
 
     private String query = null;
     private boolean generatedKeys = false;
