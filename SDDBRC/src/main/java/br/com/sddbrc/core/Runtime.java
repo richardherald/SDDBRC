@@ -19,13 +19,15 @@ public class Runtime {
         try {
             while (true) {
                 if (!ReplicationIsRun) {
+                    ReplicationIsRun = true;
                     List<Databases> databases = persistence.ListDatabaseActiveForReplication();
                     String databasesId = "0";
                     for (Databases database : databases) {
                         databasesId += "," + database.getDatabase_Id();
                     }
                     List<Databases_R_Transactions> ListOfTransactions = transactions.getAllTransactionsWhereSincronizationIsFalse(databasesId);
-                    replicationClass.algorithmReplication(databases, ListOfTransactions);
+                    replicationClass.algorithm(databases, ListOfTransactions);
+                    ReplicationIsRun = false;
                 }
                 Thread.sleep(2000);
             }
@@ -38,9 +40,9 @@ public class Runtime {
         try {
             Object object = null;
             if (persistence.isSelect(command.getQuery())) {
-                object = persistence.executeQuery(command.getCon(), command.getQuery());
+                object = persistence.executeQuery(command);
             } else if (persistence.isInsert(command.getQuery())) {
-                object = persistence.executeUpdate(command.getCon(), command.getQuery(), command.isGeneratedKeys());
+                object = persistence.executeUpdate(command);
             }
             return object;
         } catch (Exception e) {

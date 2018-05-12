@@ -1,5 +1,6 @@
 package br.com.sddbrc.persistence_impl;
 
+import br.com.sddbrc.commons.model.CommandJDBC;
 import br.com.sddbrc.commons.model.Configurations;
 import br.com.sddbrc.commons.model.Databases;
 import br.com.sddbrc.persistence.IPersistence;
@@ -40,32 +41,38 @@ public class PersistenceImpl extends Util implements IPersistence {
     }
 
     @Override
-    public int executeUpdate(Connection connection, String command, boolean generatedKeys) throws Exception {
+    public int executeUpdate(CommandJDBC command) throws Exception {
+        PreparedStatement ps = null;
         try {
-            PreparedStatement ps = connection.prepareStatement(command, generatedKeys ? 1 : 0);
+            ps = command.getCon().prepareStatement(command.getQuery(), command.isGeneratedKeys() ? 1 : 0);
             int returnValue = ps.executeUpdate();
-            return generatedKeys ? returnGeneratedKeys(ps, returnValue) : returnValue;
+            return command.isGeneratedKeys() ? returnGeneratedKeys(ps, returnValue) : returnValue;
         } catch (SQLException e) {
             throw e;
         } catch (Exception e) {
             throw e;
+        } finally {
+            closeConnection(null, ps, command.getCon());
         }
     }
 
     @Override
-    public ResultSet executeQuery(Connection connection, String command) throws Exception {
+    public ResultSet executeQuery(CommandJDBC command) throws Exception {
         try {
-            return connection.prepareStatement(command).executeQuery();
+            return command.getCon().prepareStatement(command.getQuery()).executeQuery();
         } catch (SQLException e) {
             throw e;
         } catch (Exception e) {
             throw e;
+        } finally {
+            closeConnection(null, null, command.getCon());
         }
     }
 
-    public void executeQueryTest(Connection connection, String command) throws Exception {
+    public void executeQueryTest(CommandJDBC command) throws Exception {
+        ResultSet rs = null;
         try {
-            ResultSet rs = connection.prepareStatement(command).executeQuery();
+            rs = command.getCon().prepareStatement(command.getQuery()).executeQuery();
             while (rs.next() == true) {
                 System.out.println(rs.getInt("pessoa_Id"));
                 System.out.println(rs.getString("Pessoa_Nome"));
@@ -76,6 +83,8 @@ public class PersistenceImpl extends Util implements IPersistence {
             throw e;
         } catch (Exception e) {
             throw e;
+        } finally {
+            closeConnection(rs, null, command.getCon());
         }
     }
 
@@ -115,7 +124,7 @@ public class PersistenceImpl extends Util implements IPersistence {
         return (command.substring(0, 6).contains("INSERT"));
     }
 
-    public Connection ReturnConnection(List<Databases> databases, int databaseId) throws Exception {
+    public Connection getConnection(List<Databases> databases, int databaseId) throws Exception {
         try {
             for (Databases database : databases) {
                 if (database.getDatabase_Id() == databaseId) {
@@ -128,20 +137,26 @@ public class PersistenceImpl extends Util implements IPersistence {
         return null;
     }
 
-    public String testConnection() throws Exception {
+    /**
+     * Testar todas as conexões antes de retornar para fazer a replicação.
+     * classe
+     *
+     * @return List<Databases> databases
+     * @throws Exception
+     */
+    public List<Databases> ListDatabaseActiveForReplication() throws Exception {
         try {
-            String databaseConnectionsValid = "0";
+            List<Databases> listDatabases = new ArrayList<>();
             for (int i = 0; i < getPOOLS().size(); i++) {
                 Connection conn = null;
                 PreparedStatement ps = null;
-                ResultSet rs = null;
                 conn = getPOOLS().get(i).getDatasource().getConnection();
                 ps = conn.prepareStatement("SELECT 1");
                 if (ps.executeQuery().next()) {
-                    databaseConnectionsValid += "," + getPOOLS().get(i).getDatabase_Id();
+                    listDatabases.add(getPOOLS().get(i));
                 }
             }
-            return databaseConnectionsValid;
+            return listDatabases;
         } catch (SQLException e) {
             throw e;
         } catch (Exception e) {

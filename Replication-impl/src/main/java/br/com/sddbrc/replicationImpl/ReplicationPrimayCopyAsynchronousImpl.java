@@ -5,16 +5,15 @@ import br.com.sddbrc.commons.model.Databases;
 import br.com.sddbrc.commons.model.Databases_R_Transactions;
 import br.com.sddbrc.persistence_impl.PersistenceImpl;
 import br.com.sddbrc.replication.IReplication;
-import java.sql.Connection;
 import java.util.List;
 
-public class ReplicationEasyImpl extends IReplication {
+public class ReplicationPrimayCopyAsynchronousImpl extends IReplication {
 
     private PersistenceImpl persistence = new PersistenceImpl();
     private br.com.sddbrc.core.Runtime runtime = new br.com.sddbrc.core.Runtime();
     
     @Override
-    public void algorithmReplication(List<Databases> datasources, List<Databases_R_Transactions> transactions) throws Exception {
+    public void algorithm(List<Databases> datasources, List<Databases_R_Transactions> transactions) throws Exception {
         try {
             int databaseId = 0;
             CommandJDBC command = new CommandJDBC();
@@ -27,7 +26,7 @@ public class ReplicationEasyImpl extends IReplication {
                 // analisar se isso esta correto realmente
                 command.setQuery(transactions.get(i).getTransaction().getTransaction_Script());
                 command.setGeneratedKeys(false);
-                runtime.execute(command);
+                persistence.executeUpdate(command);
             }
         } catch (Exception e) {
             throw e;
@@ -37,7 +36,7 @@ public class ReplicationEasyImpl extends IReplication {
 //    @Override
 //    public void algorithmReplication(List<Databases> databases, CommandJDBC commandJDBC) throws Exception {
 //        Connection conn = persistence.getPOLL_MASTER().getDatasource().getConnection();
-//        conn.setAutoCommit(commandJDBC.isBeginTransaction());
+//        conn.setAutoCommit(commandJDBC.isBeginTransaction());c
 //        commandJDBC.setCon(conn);
 //        runtime.execute(commandJDBC);
 //        if (commandJDBC.isBeginTransaction()) {
