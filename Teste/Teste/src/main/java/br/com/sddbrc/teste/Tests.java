@@ -1,22 +1,90 @@
 package br.com.sddbrc.teste;
 
 import br.com.sddbrc.commons.model.CommandJDBC;
-import java.io.PrintStream;
+import br.com.sddbrc.connection_impl.ConnectionImpl;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Scanner;
 
-/**
- *
- * @author herald
- */
-public class Main {
-    public static void main(String[] args) {
-        System.out.println("br.com.sddbrc.teste.Main.main()");
+public class Tests {
+
+    private static Tests teste = new Tests();
+    private ConnectionImpl connection = new ConnectionImpl();
+    private static final String host = "192.168.0.107";
+    private static final int port = 12345;
+
+    public static void main(String[] args) throws Exception {
+        teste.stressPlataformaInsert(1000);
+        teste.stressPlataformaInsert(10000);
+        teste.stressPlataformaInsert(50000);
+        teste.stressPlataformaInsert(100000);
     }
-    
-//    public void teste() throws Exception {
 
-        // SELECT //
+    public void callSocketServer(String host, int port, Object obj) throws Exception {
+        try {
+            Socket cliente = new Socket(host, port);
+            ObjectOutputStream oos = new ObjectOutputStream(cliente.getOutputStream());
+            oos.writeObject(obj);
+            oos.flush();
+            oos.close();
+            cliente.close();
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    public void stressPlataformaInsert(int quantidade) throws IOException, Exception {
+        try {
+            for (int i = 0; i < quantidade; i++) {
+                CommandJDBC command = new CommandJDBC();
+                String insert_pessoa = "INSERT INTO Pessoa (pessoa_Id,pessoa_Nome,pessoa_Cpf,pessoa_sexo,pessoa_dataNascimento,pessoa_Email) VALUES (" + i + ",'Richard','12345678900','M','12/05/2018 00:35:00.000','email@email.com')";
+                command.setQuery(insert_pessoa);
+                command.setGeneratedKeys(false);
+                callSocketServer(host, port, command);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+
+    }
+
+    public void stressPlataformaUpdate(int quantidade) throws Exception {
+        try {
+            for (int i = 0; i < quantidade; i++) {
+                CommandJDBC command = new CommandJDBC();
+                String update_pessoa = "UPDATE PESSOA SET pessoa_Nome = 'Islan', pessoa_Cpf = '00000000000', pessoa_sexo = 'M', pessoa_dataNascimento = '01/01/2018 00:00:00.000', pessoa_Email = 'email@email.com' WHERE pessoa_Id = " + i;
+                command.setQuery(update_pessoa);
+                command.setGeneratedKeys(false);
+                callSocketServer(host, port, command);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    public void stressPlataformaDelete(int quantidade) throws Exception {
+        try {
+            for (int i = 0; i < quantidade; i++) {
+                CommandJDBC command = new CommandJDBC();
+                String delete_pessoa = "DELETE FROM Pessoa  WHERE pessoa_Id = " + i;
+                command.setQuery(delete_pessoa);
+                command.setGeneratedKeys(false);
+                callSocketServer(host, port, command);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+
+    }
+
+    public static void stressJDBC(int quantidade) {
+        for (int i = 0; i < quantidade; i++) {
+
+        }
+    }
+
+//    public void teste() throws Exception {
+    // SELECT //
 //        CommandJDBC select = new CommandJDBC();
 //        select.setQuery("SELECT TOP (10) * FROM [TESTE].[dbo].[Pessoa]");
 //        select.setGeneratedKeys(false);
@@ -49,27 +117,5 @@ public class Main {
 //        delete.setGeneratedKeys(false);
 //        Runtime.getInstance().execute(delete);
 //
-//    }
-//    
-//    public void ThreadReplication() throws Exception {
-//        try {
-//            while (true) {
-//                System.out.println("Comecou o socket");
-//                Socket cliente = new Socket("127.0.0.1", 12345);
-//                System.out.println("O cliente se conectou ao servidor!");
-//                Scanner teclado = new Scanner(System.in);
-//                PrintStream saida = new PrintStream(cliente.getOutputStream());
-//
-//                while (teclado.hasNextLine()) {
-//                    saida.println(teclado.nextLine());
-//                }
-//
-//                saida.close();
-//                teclado.close();
-//                Thread.sleep(10000);
-//            }
-//        } catch (Exception e) {
-//            throw e;
-//        }
 //    }
 }
