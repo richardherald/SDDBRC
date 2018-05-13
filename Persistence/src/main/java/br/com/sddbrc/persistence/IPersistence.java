@@ -8,7 +8,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 public interface IPersistence {
-    public void init(List<Databases> databases) throws Exception;
+    public void init(List<Databases> databases, String classPersistence) throws Exception;
     public DataSource createPool(Configurations config) throws Exception;
     public int executeUpdate(CommandJDBC command) throws Exception;
     public ResultSet executeQuery(CommandJDBC command) throws Exception;

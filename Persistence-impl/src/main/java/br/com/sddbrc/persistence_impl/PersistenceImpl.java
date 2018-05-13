@@ -16,7 +16,6 @@ import javax.sql.DataSource;
 
 public class PersistenceImpl extends Util implements IPersistence {
 
-    // criar uma classe abstrata para colocar as variaveis que nunca vao mudar
     private static List<Databases> POOLS = new ArrayList<>();
     private static Databases POLL_MASTER = new Databases();
 
@@ -93,18 +92,18 @@ public class PersistenceImpl extends Util implements IPersistence {
      * classe
      *
      * @param databases
+     * @param classPersistence
      * @throws Exception
      */
     @Override
-    public void init(List<Databases> databases) throws Exception {
+    public void init(List<Databases> databases,String classPersistence) throws Exception {
         try {
             for (int i = 0; i < databases.size(); i++) {
                 Databases database = databases.get(i);
                 if (database.getDatabase_Principal()) {
                     setPOLL_MASTER(database);
                 }
-                String clazz = database.getDatabase_ClassDatasource();
-                IPersistence configConnection = (PersistenceImpl) Class.forName(clazz).newInstance();
+                IPersistence configConnection = (PersistenceImpl) Class.forName(classPersistence).newInstance();
                 DataSource newDatasource = configConnection.createPool(database.getConfiguration());
                 databases.get(i).setDatasource(newDatasource);
             }

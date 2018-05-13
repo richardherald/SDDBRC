@@ -25,7 +25,7 @@ public class ConnectionImpl implements IConnection {
                     byte[] objectAsByte = new byte[cliente.getReceiveBufferSize()];
                     BufferedInputStream bf = new BufferedInputStream(cliente.getInputStream());
                     bf.read(objectAsByte);
-                    CommandJDBC commandJDBC = (CommandJDBC) getObjectFromByte(objectAsByte);
+                    CommandJDBC commandJDBC = (CommandJDBC) objectTobyte(objectAsByte);
                     security.basicSecurity("teste", "teste", commandJDBC);
                 }
             }
@@ -34,7 +34,7 @@ public class ConnectionImpl implements IConnection {
         }
     }
 
-    private static Object getObjectFromByte(byte[] objectAsByte) {
+    private static Object objectTobyte (byte[] objectAsByte) {
         Object obj = null;
         ByteArrayInputStream bis = null;
         ObjectInputStream ois = null;
