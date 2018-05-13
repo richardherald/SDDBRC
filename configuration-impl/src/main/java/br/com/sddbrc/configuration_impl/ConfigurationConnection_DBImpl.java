@@ -10,17 +10,7 @@ import java.util.List;
 
 public class ConfigurationConnection_DBImpl implements IConfigurationConnection {
 
-    private static Databases SDDBRC_POOL;
-    private static ConfigurationConnection_DBImpl configurationSDDBRC_DBImpl;
-
-    public ConfigurationConnection_DBImpl() {
-        SDDBRC_POOL = new Databases();
-    }
-
-    public static ConfigurationConnection_DBImpl getInstance() {
-        return configurationSDDBRC_DBImpl == null ? configurationSDDBRC_DBImpl
-                = new ConfigurationConnection_DBImpl() : configurationSDDBRC_DBImpl;
-    }
+    private static Databases SDDBRC_POOL = new Databases();
 
     @Override
     public void loadConfiguration() throws Exception {
@@ -56,14 +46,6 @@ public class ConfigurationConnection_DBImpl implements IConfigurationConnection 
         }catch(Exception e){
             throw e;
         }
-    }
-
-    public static ConfigurationConnection_DBImpl getConfigurationSDDBRC_DBImpl() {
-        return configurationSDDBRC_DBImpl;
-    }
-
-    public static void setConfigurationSDDBRC_DBImpl(ConfigurationConnection_DBImpl aConfigurationSDDBRC_DBImpl) {
-        configurationSDDBRC_DBImpl = aConfigurationSDDBRC_DBImpl;
     }
 
     public static Databases getSDDBRC_POOL() {

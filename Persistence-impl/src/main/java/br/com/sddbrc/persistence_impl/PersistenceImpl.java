@@ -1,5 +1,6 @@
 package br.com.sddbrc.persistence_impl;
 
+import br.com.sddbrc.commons.model.CommandJDBC;
 import br.com.sddbrc.commons.model.Configurations;
 import br.com.sddbrc.commons.model.Databases;
 import br.com.sddbrc.persistence.IPersistence;
@@ -9,18 +10,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
 
 public class PersistenceImpl extends Util implements IPersistence {
 
     // criar uma classe abstrata para colocar as variaveis que nunca vao mudar
-    private static List<Databases> POOLS;
-    private static PersistenceImpl persistenceImpl;
-
-    public static PersistenceImpl getInstance() {
-        return getPersistenceImpl() == null ? persistenceImpl = new PersistenceImpl() : getPersistenceImpl();
-    }
+    private static List<Databases> POOLS = new ArrayList<>();
+    private static Databases POLL_MASTER = new Databases();
 
     @Override
     public DataSource createPool(Configurations config) throws Exception {
@@ -43,32 +41,38 @@ public class PersistenceImpl extends Util implements IPersistence {
     }
 
     @Override
-    public int executeUpdate(Connection connection, String command, boolean generatedKeys) throws Exception {
+    public int executeUpdate(CommandJDBC command) throws Exception {
+        PreparedStatement ps = null;
         try {
-            PreparedStatement ps = connection.prepareStatement(command, generatedKeys ? 1 : 0);
+            ps = command.getCon().prepareStatement(command.getQuery(), command.isGeneratedKeys() ? 1 : 0);
             int returnValue = ps.executeUpdate();
-            return generatedKeys ? returnGeneratedKeys(ps, returnValue) : returnValue;
+            return command.isGeneratedKeys() ? returnGeneratedKeys(ps, returnValue) : returnValue;
         } catch (SQLException e) {
             throw e;
         } catch (Exception e) {
             throw e;
+        } finally {
+            closeConnection(null, ps, command.getCon());
         }
     }
 
     @Override
-    public ResultSet executeQuery(Connection connection, String command) throws Exception {
+    public ResultSet executeQuery(CommandJDBC command) throws Exception {
         try {
-            return connection.prepareStatement(command).executeQuery();
+            return command.getCon().prepareStatement(command.getQuery()).executeQuery();
         } catch (SQLException e) {
             throw e;
         } catch (Exception e) {
             throw e;
+        } finally {
+            closeConnection(null, null, command.getCon());
         }
     }
 
-    public void executeQueryTest(Connection connection, String command) throws Exception {
+    public void executeQueryTest(CommandJDBC command) throws Exception {
+        ResultSet rs = null;
         try {
-            ResultSet rs = connection.prepareStatement(command).executeQuery();
+            rs = command.getCon().prepareStatement(command.getQuery()).executeQuery();
             while (rs.next() == true) {
                 System.out.println(rs.getInt("pessoa_Id"));
                 System.out.println(rs.getString("Pessoa_Nome"));
@@ -79,21 +83,25 @@ public class PersistenceImpl extends Util implements IPersistence {
             throw e;
         } catch (Exception e) {
             throw e;
+        } finally {
+            closeConnection(rs, null, command.getCon());
         }
     }
 
     /**
-     * Metodo responsavel por instanciar o pool de conexões baseado no nome da classe
+     * Metodo responsavel por instanciar o pool de conexões baseado no nome da
+     * classe
+     *
      * @param databases
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public void init(List<Databases> databases) throws Exception {
         try {
             for (int i = 0; i < databases.size(); i++) {
                 Databases database = databases.get(i);
-                if (database.getDatabase_Principal()){
-                    
+                if (database.getDatabase_Principal()) {
+                    setPOLL_MASTER(database);
                 }
                 String clazz = database.getDatabase_ClassDatasource();
                 IPersistence configConnection = (PersistenceImpl) Class.forName(clazz).newInstance();
@@ -116,7 +124,7 @@ public class PersistenceImpl extends Util implements IPersistence {
         return (command.substring(0, 6).contains("INSERT"));
     }
 
-    public Connection ReturnConnection(List<Databases> databases, int databaseId) throws Exception {
+    public Connection getConnection(List<Databases> databases, int databaseId) throws Exception {
         try {
             for (Databases database : databases) {
                 if (database.getDatabase_Id() == databaseId) {
@@ -129,20 +137,26 @@ public class PersistenceImpl extends Util implements IPersistence {
         return null;
     }
 
-    public String testConnection() throws Exception {
+    /**
+     * Testar todas as conexões antes de retornar para fazer a replicação.
+     * classe
+     *
+     * @return List<Databases> databases
+     * @throws Exception
+     */
+    public List<Databases> ListDatabaseActiveForReplication() throws Exception {
         try {
-            String databaseConnectionsValid = "0";
-            for (int i = 0; i < POOLS.size(); i++) {
+            List<Databases> listDatabases = new ArrayList<>();
+            for (int i = 0; i < getPOOLS().size(); i++) {
                 Connection conn = null;
                 PreparedStatement ps = null;
-                ResultSet rs = null;
-                conn = POOLS.get(i).getDatasource().getConnection();
+                conn = getPOOLS().get(i).getDatasource().getConnection();
                 ps = conn.prepareStatement("SELECT 1");
                 if (ps.executeQuery().next()) {
-                    databaseConnectionsValid += "," + POOLS.get(i).getDatabase_Id();
+                    listDatabases.add(getPOOLS().get(i));
                 }
             }
-            return databaseConnectionsValid;
+            return listDatabases;
         } catch (SQLException e) {
             throw e;
         } catch (Exception e) {
@@ -150,19 +164,31 @@ public class PersistenceImpl extends Util implements IPersistence {
         }
     }
 
-    public static List<Databases> getPOOLS() {
+    /**
+     * @return the POOLS
+     */
+    public List<Databases> getPOOLS() {
         return POOLS;
     }
 
-    public static void setPOOLS(List<Databases> aPOOLS) {
+    /**
+     * @param aPOOLS the POOLS to set
+     */
+    public void setPOOLS(List<Databases> aPOOLS) {
         POOLS = aPOOLS;
     }
 
-    public static PersistenceImpl getPersistenceImpl() {
-        return persistenceImpl;
+    /**
+     * @return the POLL_MASTER
+     */
+    public Databases getPOLL_MASTER() {
+        return POLL_MASTER;
     }
 
-    public static void setPersistenceImpl(PersistenceImpl aPersistenceImpl) {
-        persistenceImpl = aPersistenceImpl;
+    /**
+     * @param aPOLL_MASTER the POLL_MASTER to set
+     */
+    public void setPOLL_MASTER(Databases aPOLL_MASTER) {
+        POLL_MASTER = aPOLL_MASTER;
     }
 }

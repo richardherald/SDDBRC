@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class Util {
 
-    ConfigurationConnection_DBImpl configConnection = ConfigurationConnection_DBImpl.getInstance();
+    ConfigurationConnection_DBImpl configConnection = new ConfigurationConnection_DBImpl();
 
     protected int returnGeneratedKeys(PreparedStatement ps, int retorno) throws SQLException {
         if (retorno == 0) {
@@ -23,7 +23,7 @@ public class Util {
     }
 
     protected Connection getConnection() throws Exception {
-        return configConnection.getSDDBRC_POOL().getDatasource().getConnection();
+        return ConfigurationConnection_DBImpl.getSDDBRC_POOL().getDatasource().getConnection();
     }
 
     public void closeConnection(ResultSet rs, PreparedStatement ps, Connection conn) throws SQLException {

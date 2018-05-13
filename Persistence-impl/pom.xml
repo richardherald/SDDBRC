@@ -19,12 +19,6 @@
             <scope>compile</scope> 
         </dependency>
         <dependency>
-            <groupId>br.com.sddbrc</groupId>
-            <artifactId>SDDBRC</artifactId>
-            <version>1.0</version>
-            <scope>compile</scope> 
-        </dependency>
-        <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
             <version>2.7.3</version>

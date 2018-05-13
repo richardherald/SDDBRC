@@ -1,9 +1,7 @@
 package br.com.sddbrc.security;
 
-/**
- *
- * @author islanm
- */
+import br.com.sddbrc.commons.model.CommandJDBC;
+
 public interface ISecurity {
-    public Object basicSecurity(String username, String password, String command) throws Exception;
+    public Object basicSecurity(String username, String password, CommandJDBC commandJDBC) throws Exception;
 }

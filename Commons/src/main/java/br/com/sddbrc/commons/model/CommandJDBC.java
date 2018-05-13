@@ -4,19 +4,13 @@ import java.sql.Connection;
 
 public class CommandJDBC {
 
-    private String query;
-    private boolean generatedKeys;
-    private String DML;
-    private Connection con;
-    private boolean beginTransaction=false;
+    private String query = null;
+    private boolean generatedKeys = false;
+    private String DML = null;
+    private Connection con = null;
+    private boolean beginTransaction = false;
 
     public CommandJDBC() {
-    }
-
-    public CommandJDBC(String query, boolean generatedKeys, String DML) {
-        this.query = query;
-        this.generatedKeys = generatedKeys;
-        this.DML = DML;
     }
 
     public boolean isGeneratedKeys() {
