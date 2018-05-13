@@ -5,8 +5,6 @@ import br.com.sddbrc.commons.property.Property;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import br.com.sddbrc.configuration.IConfigurationConnection;
-import br.com.sddbrc.configuration.IDatabase;
-import java.util.List;
 
 public class ConfigurationConnection_DBImpl implements IConfigurationConnection {
 
@@ -29,21 +27,6 @@ public class ConfigurationConnection_DBImpl implements IConfigurationConnection 
         } catch (NumberFormatException e) {
             throw e;
         } catch (Exception e) {
-            throw e;
-        }
-    }
-    
-    public List<Databases> getDatabasesWithConfiguration() throws Exception {
-        try{
-            IDatabase databaseImpl = new DatabaseImpl();
-            ConfigurationImpl configurationImpl = new ConfigurationImpl();
-            List<Databases> databases = databaseImpl.getAll();
-            for (int i = 0; i < databases.size(); i++){
-                // se acontecer algum erro: parar tudo ou usar o que subir
-                databases.get(i).setConfiguration(configurationImpl.getByDatabaseId(databases.get(i).getDatabase_Id()));
-            }
-            return databases;
-        }catch(Exception e){
             throw e;
         }
     }
