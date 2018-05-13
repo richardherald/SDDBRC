@@ -40,11 +40,11 @@ public class DatabaseRTransactionImpl extends Util implements IDatabaseRTransact
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        List<Databases_R_Transactions> databasesRTransactions = new ArrayList<>();
         try {
             conn = getConnection();
-            ps = conn.prepareStatement("SELECT * FROM SDDBRC_Database_R_SDDBRC_Transaction as databaseRtransaction INNER JOIN SDDBRC_Transaction as transaction ON (databaseRtransaction.sddbrc_transaction_id = sddbrc_transaction.transaction_id WHERE sddbrc_sincronization_id = 0 AND databaseRtransaction.sddbrc_database_id in (" + arrayDatabases + ") ORDER BY databaseRtransaction.sddbrc_database_id)");
+            ps = conn.prepareStatement("SELECT * FROM [SDDBRC].[dbo].[SDDBRC_Database_R_SDDBRC_Transaction] as databaseRtransaction INNER JOIN [SDDBRC].[dbo].[SDDBRC_Transaction] as trans ON (databaseRtransaction.sddbrc_transaction_id = trans.sddbrc_transaction_id) WHERE databaseRtransaction.sddbrc_sincronization_id = 0 AND databaseRtransaction.sddbrc_database_id in (" + arrayDatabases + ") ORDER BY databaseRtransaction.sddbrc_database_id");
             rs = ps.executeQuery();
-            List<Databases_R_Transactions> databasesRTransactions = new ArrayList<>();
             while (rs.next()) {
                 Databases_R_Transactions databaseRtransaction = new Databases_R_Transactions();
                 databaseRtransaction.setDatabase_R_Transaction_Id(rs.getInt("sddbrc_database_R_sddbrc_transaction_id"));

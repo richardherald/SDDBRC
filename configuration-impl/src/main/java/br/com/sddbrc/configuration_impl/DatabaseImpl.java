@@ -26,10 +26,8 @@ public class DatabaseImpl extends Util implements IDatabase {
                 banco.setDatabase_Id(rs.getInt("sddbrc_database_id"));
                 banco.setDatabase_Name(rs.getString("sddbrc_database_name"));
                 banco.setDatabase_Principal(rs.getBoolean("sddbrc_database_principal"));
-                banco.setDatabase_Driver(rs.getString("sddbrc_database_driver"));
                 banco.setDatabase_Priority(rs.getInt("sddbrc_database_priority"));
                 banco.setDatabase_Active(rs.getBoolean("sddbrc_database_active"));
-                banco.setDatabase_ClassDatasource(rs.getString("sddbrc_database_classDataSource"));
                 bancos.add(banco);
             }
             return bancos;
@@ -37,6 +35,8 @@ public class DatabaseImpl extends Util implements IDatabase {
             throw e;
         } catch (Exception e) {
             throw e;
+        } finally {
+            closeConnection(rs, ps, conn);
         }
     }
 }

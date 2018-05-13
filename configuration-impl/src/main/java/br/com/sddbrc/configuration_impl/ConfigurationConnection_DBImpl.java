@@ -15,6 +15,7 @@ public class ConfigurationConnection_DBImpl implements IConfigurationConnection 
         try {
             HikariConfig hikariConfig = new HikariConfig();
             hikariConfig.setPoolName(Property.DB.getProperty("poolName"));
+            hikariConfig.setDriverClassName(Property.DB.getProperty("driverClassName"));
             hikariConfig.setJdbcUrl(Property.DB.getProperty("jdbcUrl"));
             hikariConfig.setUsername(Property.DB.getProperty("username"));
             hikariConfig.setPassword(Property.DB.getProperty("password"));

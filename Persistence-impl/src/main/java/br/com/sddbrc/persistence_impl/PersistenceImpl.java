@@ -24,6 +24,7 @@ public class PersistenceImpl extends Util implements IPersistence {
         try {
             HikariConfig hikariConfig = new HikariConfig();
             hikariConfig.setPoolName(config.getConfiguration_Poolname());
+            hikariConfig.setDriverClassName(config.getConfiguration_DriverClassName());
             hikariConfig.setJdbcUrl(config.getConfiguration_Jdbcurl());
             hikariConfig.setUsername(config.getConfiguration_Username());
             hikariConfig.setPassword(config.getConfiguration_Password());
@@ -114,14 +115,10 @@ public class PersistenceImpl extends Util implements IPersistence {
     }
 
     @Override
-    public boolean isSelect(String command) {
-        return (command.substring(0, 6).contains("SELECT"));
+    public boolean findScriptByName(String command, String Action) {
+        return (command.substring(0, 6).contains(Action));
     }
 
-    @Override
-    public boolean isInsert(String command) {
-        return (command.substring(0, 6).contains("INSERT"));
-    }
 
     public Connection getConnection(List<Databases> databases, int databaseId) throws Exception {
         try {

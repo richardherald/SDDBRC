@@ -23,6 +23,7 @@ public class ConfigurationImpl extends Util implements IConfiguration {
             while (rs.next()) {
                 config.setConfiguration_Id(rs.getInt("sddbrc_configuration_id"));
                 config.setConfiguration_Poolname(rs.getString("sddbrc_configuration_poolName"));
+                config.setConfiguration_DriverClassName(rs.getString("sddbrc_configuration_driverClassName"));
                 config.setConfiguration_Jdbcurl(rs.getString("sddbrc_configuration_jdbcUrl"));
                 config.setConfiguration_Username(rs.getString("sddbrc_configuration_username"));
                 config.setConfiguration_Password(rs.getString("sddbrc_configuration_password"));
@@ -33,6 +34,8 @@ public class ConfigurationImpl extends Util implements IConfiguration {
             return config;
         } catch (SQLException e) {
             throw e;
+        } finally {
+            closeConnection(rs, ps, conn);
         }
     }
 }

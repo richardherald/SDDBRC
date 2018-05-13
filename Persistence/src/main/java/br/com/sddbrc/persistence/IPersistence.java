@@ -12,6 +12,5 @@ public interface IPersistence {
     public DataSource createPool(Configurations config) throws Exception;
     public int executeUpdate(CommandJDBC command) throws Exception;
     public ResultSet executeQuery(CommandJDBC command) throws Exception;
-    public boolean isSelect(String command) throws Exception;
-    public boolean isInsert(String command) throws Exception;
+    public boolean findScriptByName(String command, String Action) throws Exception;
 }
