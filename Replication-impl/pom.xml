@@ -31,6 +31,13 @@
             <groupId>br.com.sddbrc.commons</groupId>
             <artifactId>Commons</artifactId>
             <version>1.0</version>
+            <scope>compile</scope> 
+        </dependency>
+        <dependency>
+            <groupId>br.com.sddbrc.persistence</groupId>
+            <artifactId>Persistence</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope> 
         </dependency>
         <dependency>
             <groupId>br.com.sddbrc.replication</groupId>
