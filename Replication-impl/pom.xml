@@ -17,8 +17,21 @@
                     <groupId>br.com.sddbrc.persistence</groupId>
                     <artifactId>Persistence</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>br.com.sddbrc.commons</groupId>
+                    <artifactId>Commons</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.zaxxer</groupId>
+                    <artifactId>HikariCP</artifactId>
+                </exclusion>
             </exclusions>
-        </dependency> 
+        </dependency>
+        <dependency>
+            <groupId>br.com.sddbrc.commons</groupId>
+            <artifactId>Commons</artifactId>
+            <version>1.0</version>
+        </dependency>
         <dependency>
             <groupId>br.com.sddbrc.replication</groupId>
             <artifactId>Replication</artifactId>
