@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,16 +15,16 @@ public class DatabaseRTransactionImpl extends Util implements IDatabaseRTransact
 
     @Override
     public int insert(Databases_R_Transactions databaseRTransaction) throws Exception {
-         Connection conn = null;
+        Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
             conn = getConnection();
-            ps = conn.prepareStatement("INSERT INTO [SDDBRC].[dbo].[SDDBRC_Database_R_SDDBRC_Transaction] ([sddbrc_transaction_id] ,[sddbrc_database_id] ,[sddbrc_sincronization_id] ,[sddbrc_database_r_sddbrc_transaction_dateSincronization])  (?,?,?,?)");
+            ps = conn.prepareStatement("INSERT INTO [SDDBRC].[dbo].[SDDBRC_Database_R_SDDBRC_Transaction] ([sddbrc_transaction_id] ,[sddbrc_database_id] ,[sddbrc_sincronization_id] ,[sddbrc_database_r_sddbrc_transaction_dateSincronization]) VALUES (?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, databaseRTransaction.getTransaction_Id());
             ps.setInt(2, databaseRTransaction.getDatabase_Id());
-            ps.setInt(3, Sincronization.NAO_SINCRONIZADO.getCodigo());
-            ps.setString(4, null);
+            ps.setInt(3, databaseRTransaction.getSincronization_Id());
+            ps.setTimestamp(4, databaseRTransaction.getDatabase_R_Transaction_DateSincronization());
             int returnValue = ps.executeUpdate();
             return returnGeneratedKeys(ps, returnValue);
         } catch (SQLException e) {

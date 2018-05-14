@@ -7,6 +7,8 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -18,33 +20,21 @@ public class ConnectionImpl implements IConnection {
     public void socket() throws Exception {
         try {
             ServerSocket servidor = new ServerSocket(12345);
-            System.out.println("Servidor ligado na porta:" + 12345);
             while (true) {
-                try (Socket cliente = servidor.accept()) {
-                    System.out.println("Nova conexão com o cliente " + cliente.getInetAddress().getHostAddress());
-                    byte[] objectAsByte = new byte[cliente.getReceiveBufferSize()];
-                    BufferedInputStream bf = new BufferedInputStream(cliente.getInputStream());
-                    bf.read(objectAsByte);
-                    CommandJDBC commandJDBC = (CommandJDBC) objectTobyte(objectAsByte);
-                    security.basicSecurity("teste", "teste", commandJDBC);
+                try (
+                        Socket cliente = servidor.accept();
+                        ObjectInputStream in = new ObjectInputStream(cliente.getInputStream());
+                        ObjectOutputStream out = new ObjectOutputStream(cliente.getOutputStream());
+                    ) 
+                {
+                    CommandJDBC commandJDBC = (CommandJDBC) in.readObject();
+                    Object objetoSaida = security.basicSecurity("teste", "teste", commandJDBC);
+                    out.writeObject(objetoSaida);
+                    out.flush();
                 }
             }
         } catch (Exception e) {
             throw e;
         }
-    }
-
-    private static Object objectTobyte (byte[] objectAsByte) {
-        Object obj = null;
-        ByteArrayInputStream bis = null;
-        ObjectInputStream ois = null;
-        try {
-            ois = new ObjectInputStream(new ByteArrayInputStream(objectAsByte));
-            obj = ois.readObject();
-            ois.close();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return obj;
     }
 }
