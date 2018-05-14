@@ -1,32 +1,38 @@
 package br.com.sddbrc.teste;
 
 import br.com.sddbrc.commons.model.CommandJDBC;
-import br.com.sddbrc.connection_impl.ConnectionImpl;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.sql.Timestamp;
 
 public class Tests {
 
     private static Tests teste = new Tests();
-    private ConnectionImpl connection = new ConnectionImpl();
-    private static final String host = "192.168.0.107";
+    private static final String host = "192.168.0.108";
     private static final int port = 12345;
 
     public static void main(String[] args) throws Exception {
         teste.stressPlataformaInsert(1000);
-        teste.stressPlataformaInsert(10000);
-        teste.stressPlataformaInsert(50000);
-        teste.stressPlataformaInsert(100000);
+//        teste.stressPlataformaInsert(10000);
+//        teste.stressPlataformaInsert(50000);
+//        teste.stressPlataformaInsert(100000);
     }
 
     public void callSocketServer(String host, int port, Object obj) throws Exception {
         try {
+            System.out.println("Iniciando a chamada do socket no tempo: " + new Timestamp(System.currentTimeMillis()).toString());
             Socket cliente = new Socket(host, port);
-            ObjectOutputStream oos = new ObjectOutputStream(cliente.getOutputStream());
-            oos.writeObject(obj);
-            oos.flush();
-            oos.close();
+            ObjectOutputStream out = new ObjectOutputStream(cliente.getOutputStream());
+            ObjectInputStream in = new ObjectInputStream(cliente.getInputStream());
+            out.writeObject(obj);
+            out.flush();
+            Object retorno = (Object) in.readObject();
+            System.out.println("Finalizando a chamada do socket no tempo: " + new Timestamp(System.currentTimeMillis()).toString());
+            out.close();
             cliente.close();
         } catch (Exception e) {
             throw e;

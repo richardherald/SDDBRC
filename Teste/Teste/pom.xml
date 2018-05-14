@@ -12,22 +12,6 @@
             <artifactId>Commons</artifactId>
             <version>1.0</version>
         </dependency>
-        <dependency>
-            <groupId>br.com.sddbrc.connection-impl</groupId>
-            <artifactId>Connection-impl</artifactId>
-            <version>1.0</version>
-            <scope>compile</scope> 
-            <exclusions>
-                <exclusion>
-                    <groupId>br.com.sddbrc.connection</groupId>
-                    <artifactId>Connection</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>br.com.sddbrc.security-impl</groupId>
-                    <artifactId>Security-impl</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
