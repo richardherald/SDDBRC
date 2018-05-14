@@ -14,7 +14,7 @@ public class TransactionImpl extends Util implements ITransaction {
         PreparedStatement ps = null;
         try {
             conn = getConnection();
-            ps = conn.prepareStatement("INSERT INTO [SDDBRC].[dbo].[Transaction] ([transaction_Script]) VALUES (?)");
+            ps = conn.prepareStatement("INSERT INTO [SDDBRC].[dbo].[SDDBRC_Transaction] ([sddbrc_transaction_script]) VALUES (?)");
             ps.setString(1, obj.getTransaction_Script());
             int returnValue = ps.executeUpdate();
             return returnGeneratedKeys(ps, returnValue);

@@ -37,49 +37,4 @@ public class Util {
             conn.close();
         }
     }
-
-    public String extractTableByQuery(String query) {
-        try {
-            String[] aux;
-            String[] queryAux;
-            queryAux = query.split("\\(");
-            if (queryAux[0].contains(".")) {
-                aux = queryAux[0].split("\\.");
-                query = aux[aux.length - 1];
-                query = query.replace("[", "").replace("]", "").replace(" ", "");
-            } else {
-                aux = query.split(" ");
-                query = aux[aux.length - 1];
-                query = query.replace("[", "").replace("]", "").replace(" ", "");
-            }
-            return query;
-        } catch (Exception e) {
-            throw e;
-        }
-    }
-
-    public String extractCommandByQuery(String query) {
-        try {
-            return query.split(" ")[0];
-        } catch (Exception e) {
-            throw e;
-        }
-    }
-
-    public String concatTableIdOnQuery(String query, String tableId, int valueId) {
-        try {
-            String corte = "(";
-            int begin = query.toUpperCase().indexOf(corte.toUpperCase());
-            String inicio = query.substring(0, begin + 1);
-            inicio = inicio.concat(tableId.concat(","));
-            String aux = inicio.concat(query.substring(begin + 1, query.length()));
-            //segunda parte
-            begin = aux.indexOf(corte, aux.indexOf(corte)+1);
-            inicio = aux.substring(0, begin+1).concat(""+valueId+",");
-            aux = inicio.concat(aux.substring(begin + 1, aux.length()));
-            return aux;
-        } catch (Exception e) {
-            throw e;
-        }
-    }
 }

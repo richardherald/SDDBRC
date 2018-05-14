@@ -18,18 +18,16 @@ public class DatabaseImpl extends Util implements IDatabase {
         ResultSet rs = null;
         try {
             conn = getConnection();
-            ps = conn.prepareStatement("select * from Databases");
+            ps = conn.prepareStatement("SELECT * FROM SDDBRC_database");
             rs = ps.executeQuery();
             List<Databases> bancos = new ArrayList<>();
             while (rs.next() == true) {
                 Databases banco = new Databases();
-                banco.setDatabase_Id(rs.getInt("databases_Id"));
-                banco.setDatabase_Name(rs.getString("databases_Name"));
-                banco.setDatabase_Principal(rs.getBoolean("databases_Principal"));
-                banco.setDatabase_Driver(rs.getString("databases_Driver"));
-                banco.setDatabase_Priority(rs.getInt("databases_Priority"));
-                banco.setDatabase_Active(rs.getBoolean("databases_Active"));
-                banco.setDatabase_ClassDatasource(rs.getString("databases_ClassDataSource"));
+                banco.setDatabase_Id(rs.getInt("sddbrc_database_id"));
+                banco.setDatabase_Name(rs.getString("sddbrc_database_name"));
+                banco.setDatabase_Principal(rs.getBoolean("sddbrc_database_principal"));
+                banco.setDatabase_Priority(rs.getInt("sddbrc_database_priority"));
+                banco.setDatabase_Active(rs.getBoolean("sddbrc_database_active"));
                 bancos.add(banco);
             }
             return bancos;
@@ -37,6 +35,8 @@ public class DatabaseImpl extends Util implements IDatabase {
             throw e;
         } catch (Exception e) {
             throw e;
+        } finally {
+            closeConnection(rs, ps, conn);
         }
     }
 }

@@ -6,8 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ConfigurationImpl extends Util implements IConfiguration {
 
@@ -18,23 +16,26 @@ public class ConfigurationImpl extends Util implements IConfiguration {
         ResultSet rs = null;
         try {
             conn = getConnection();
-            ps = conn.prepareStatement("select * from Configurations where databases_Id = ?");
+            ps = conn.prepareStatement("SELECT * FROM SDDBRC_configuration WHERE sddbrc_database_id = ?");
             ps.setInt(1, databaseId);
             rs = ps.executeQuery();
             Configurations config = new Configurations();
             while (rs.next()) {
-                config.setConfiguration_Id(rs.getInt("configuration_Id"));
-                config.setConfiguration_Poolname(rs.getString("configuration_Poolname"));
-                config.setConfiguration_Jdbcurl(rs.getString("configuration_Jdbcurl"));
-                config.setConfiguration_Username(rs.getString("configuration_Username"));
-                config.setConfiguration_Password(rs.getString("configuration_Password"));
-                config.setConfiguration_Maxpoolsize(rs.getInt("configuration_Maxpoolsize"));
-                config.setConfiguration_Cachesize(rs.getInt("configuration_Cachesize"));
-                config.setConfiguration_Cachesizelimit(rs.getInt("configuration_Cachesizelimit"));
+                config.setConfiguration_Id(rs.getInt("sddbrc_configuration_id"));
+                config.setConfiguration_Poolname(rs.getString("sddbrc_configuration_poolName"));
+                config.setConfiguration_DriverClassName(rs.getString("sddbrc_configuration_driverClassName"));
+                config.setConfiguration_Jdbcurl(rs.getString("sddbrc_configuration_jdbcUrl"));
+                config.setConfiguration_Username(rs.getString("sddbrc_configuration_username"));
+                config.setConfiguration_Password(rs.getString("sddbrc_configuration_password"));
+                config.setConfiguration_Maxpoolsize(rs.getInt("sddbrc_configuration_maxPoolSize"));
+                config.setConfiguration_Cachesize(rs.getInt("sddbrc_configuration_cacheSize"));
+                config.setConfiguration_Cachesizelimit(rs.getInt("sddbrc_configuration_cacheSizeLimit"));
             }
             return config;
         } catch (SQLException e) {
             throw e;
+        } finally {
+            closeConnection(rs, ps, conn);
         }
     }
 }

@@ -18,12 +18,10 @@ public class ReplicationPrimaryCopyAsynchronousImpl extends IReplication {
             int databaseId = 0;
             CommandJDBC command = new CommandJDBC();
             for (int i = 0; i < transactions.size(); i++) {
-                // trazer a consulta ordenada pelo database_Id
                 if (databaseId != transactions.get(i).getDatabase_Id()) {
                     databaseId = transactions.get(i).getDatabase_Id();
                     command.setCon(persistence.getConnection(datasources, databaseId));
                 }
-                // analisar se isso esta correto realmente
                 command.setQuery(transactions.get(i).getTransaction().getTransaction_Script());
                 command.setGeneratedKeys(false);
                 persistence.executeUpdate(command);

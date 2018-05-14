@@ -12,7 +12,7 @@
             <version>1.0</version>
             <scope>compile</scope> 
         </dependency>
-         <dependency>
+        <dependency>
             <groupId>br.com.sddbrc.commons</groupId>
             <artifactId>Commons</artifactId>
             <version>1.0</version>
@@ -21,6 +21,22 @@
         <dependency>
             <groupId>br.com.sddbrc.security-impl</groupId>
             <artifactId>Security-impl</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope> 
+            <exclusions>
+                <exclusion>
+                    <groupId>br.com.sddbrc</groupId>
+                    <artifactId>SDDBRC</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>br.com.sddbrc.security</groupId>
+                    <artifactId>Security</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>br.com.sddbrc.security</groupId>
+            <artifactId>Security</artifactId>
             <version>1.0</version>
             <scope>compile</scope> 
         </dependency>

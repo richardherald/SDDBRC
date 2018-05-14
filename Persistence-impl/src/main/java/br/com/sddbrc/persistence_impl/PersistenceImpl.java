@@ -16,7 +16,6 @@ import javax.sql.DataSource;
 
 public class PersistenceImpl extends Util implements IPersistence {
 
-    // criar uma classe abstrata para colocar as variaveis que nunca vao mudar
     private static List<Databases> POOLS = new ArrayList<>();
     private static Databases POLL_MASTER = new Databases();
 
@@ -25,6 +24,7 @@ public class PersistenceImpl extends Util implements IPersistence {
         try {
             HikariConfig hikariConfig = new HikariConfig();
             hikariConfig.setPoolName(config.getConfiguration_Poolname());
+            hikariConfig.setDriverClassName(config.getConfiguration_DriverClassName());
             hikariConfig.setJdbcUrl(config.getConfiguration_Jdbcurl());
             hikariConfig.setUsername(config.getConfiguration_Username());
             hikariConfig.setPassword(config.getConfiguration_Password());
@@ -93,18 +93,18 @@ public class PersistenceImpl extends Util implements IPersistence {
      * classe
      *
      * @param databases
+     * @param classPersistence
      * @throws Exception
      */
     @Override
-    public void init(List<Databases> databases) throws Exception {
+    public void init(List<Databases> databases,String classPersistence) throws Exception {
         try {
             for (int i = 0; i < databases.size(); i++) {
                 Databases database = databases.get(i);
                 if (database.getDatabase_Principal()) {
                     setPOLL_MASTER(database);
                 }
-                String clazz = database.getDatabase_ClassDatasource();
-                IPersistence configConnection = (PersistenceImpl) Class.forName(clazz).newInstance();
+                IPersistence configConnection = (PersistenceImpl) Class.forName(classPersistence).newInstance();
                 DataSource newDatasource = configConnection.createPool(database.getConfiguration());
                 databases.get(i).setDatasource(newDatasource);
             }
@@ -115,14 +115,10 @@ public class PersistenceImpl extends Util implements IPersistence {
     }
 
     @Override
-    public boolean isSelect(String command) {
-        return (command.substring(0, 6).contains("SELECT"));
+    public boolean findScriptByName(String command, String Action) {
+        return (command.substring(0, 6).contains(Action));
     }
 
-    @Override
-    public boolean isInsert(String command) {
-        return (command.substring(0, 6).contains("INSERT"));
-    }
 
     public Connection getConnection(List<Databases> databases, int databaseId) throws Exception {
         try {
