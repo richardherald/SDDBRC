@@ -1,9 +1,7 @@
 package br.com.sddbrc.teste;
 
 import br.com.sddbrc.commons.model.CommandJDBC;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -17,23 +15,26 @@ public class Tests {
 
     public static void main(String[] args) throws Exception {
         teste.stressPlataformaInsert(1000);
-//        teste.stressPlataformaInsert(10000);
-//        teste.stressPlataformaInsert(50000);
-//        teste.stressPlataformaInsert(100000);
     }
 
     public void callSocketServer(String host, int port, Object obj) throws Exception {
         try {
-            System.out.println("Iniciando a chamada do socket no tempo: " + new Timestamp(System.currentTimeMillis()).toString());
-            Socket cliente = new Socket(host, port);
-            ObjectOutputStream out = new ObjectOutputStream(cliente.getOutputStream());
-            ObjectInputStream in = new ObjectInputStream(cliente.getInputStream());
-            out.writeObject(obj);
-            out.flush();
-            Object retorno = (Object) in.readObject();
-            System.out.println("Finalizando a chamada do socket no tempo: " + new Timestamp(System.currentTimeMillis()).toString());
-            out.close();
-            cliente.close();
+            new Thread() {
+                public void run() {
+                    try (
+                            Socket cliente = new Socket(host, port);
+                            ObjectOutputStream out = new ObjectOutputStream(cliente.getOutputStream());
+                            ObjectInputStream in = new ObjectInputStream(cliente.getInputStream());
+                        ) {
+                        System.out.println("Iniciando a chamada do socket no tempo: " + new Timestamp(System.currentTimeMillis()).toString());
+                        out.writeObject(obj);
+                        out.flush();
+                        Object retorno = (Object) in.readObject();
+                        System.out.println("Finalizando a chamada do socket no tempo: " + new Timestamp(System.currentTimeMillis()).toString());
+                    } catch (Exception e) {}
+                }
+            }.start();
+
         } catch (Exception e) {
             throw e;
         }
