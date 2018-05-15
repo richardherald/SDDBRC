@@ -16,8 +16,8 @@ import javax.sql.DataSource;
 
 public class PersistenceImpl extends Util implements IPersistence {
 
-    private static List<Databases> POOLS = new ArrayList<>();
-    private static Databases POLL_MASTER = new Databases();
+    private static List<Databases> POOLS;
+    private static Databases POLL_MASTER;
 
     @Override
     public DataSource createPool(Configurations config) throws Exception {
@@ -97,7 +97,7 @@ public class PersistenceImpl extends Util implements IPersistence {
      * @throws Exception
      */
     @Override
-    public void init(List<Databases> databases,String classPersistence) throws Exception {
+    public void init(List<Databases> databases, String classPersistence) throws Exception {
         try {
             for (int i = 0; i < databases.size(); i++) {
                 Databases database = databases.get(i);
@@ -118,7 +118,6 @@ public class PersistenceImpl extends Util implements IPersistence {
     public boolean findScriptByName(String command, String Action) {
         return (command.substring(0, 6).contains(Action));
     }
-
 
     public Connection getConnection(List<Databases> databases, int databaseId) throws Exception {
         try {
@@ -144,12 +143,10 @@ public class PersistenceImpl extends Util implements IPersistence {
         try {
             List<Databases> listDatabases = new ArrayList<>();
             for (int i = 0; i < getPOOLS().size(); i++) {
-                Connection conn = null;
-                PreparedStatement ps = null;
-                conn = getPOOLS().get(i).getDatasource().getConnection();
-                ps = conn.prepareStatement("SELECT 1");
-                if (ps.executeQuery().next()) {
-                    listDatabases.add(getPOOLS().get(i));
+                try (Connection conn = getPOOLS().get(i).getDatasource().getConnection();) {
+                    if (conn.isClosed()) {
+                        listDatabases.add(getPOOLS().get(i));
+                    }
                 }
             }
             return listDatabases;
