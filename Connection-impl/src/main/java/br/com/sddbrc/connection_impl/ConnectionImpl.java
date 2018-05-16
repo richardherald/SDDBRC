@@ -30,10 +30,12 @@ public class ConnectionImpl implements IConnection {
                                 out.writeObject(objetoSaida);
                                 out.flush();
                             } catch (Exception e) {
+                                System.out.println("erro: " + e.getMessage());
                             }
                         }
                     }.start();
                 } catch (Exception e) {
+                    throw e;
                 }
             }
         } catch (Exception e) {

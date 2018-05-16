@@ -20,15 +20,17 @@ public class InitApplication {
     private static InitApplication initApplication = new InitApplication();
 
     public static void main(String[] args) throws Exception {
-        System.out.println("Ligando a plataforma");
+        System.out.println("Ligando Configuracoes");
         initApplication.startConfiguration();
+        System.out.println("Ligando Persistencia");
         initApplication.startPersistence();
+        System.out.println("Ligando Replicacao");
         initApplication.startReplication();
-        initApplication.schedulerReplication();
+//        initApplication.schedulerReplication();
+        System.out.println("Ligando Servidor Socket");
         initApplication.startServerSocket();
-        System.out.println("Plataforma ligada!!");
     }
-    
+
     public void schedulerReplication() throws Exception {
         Thread t = new Thread(new Runnable() {
             @Override
@@ -44,17 +46,7 @@ public class InitApplication {
     }
 
     public void startServerSocket() throws Exception {
-         Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    connection.socket();
-                } catch (Exception ex) {
-                    Logger.getLogger(InitApplication.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-        t.start();
+        connection.socket();
     }
 
     public void startConfiguration() throws Exception {
@@ -66,6 +58,6 @@ public class InitApplication {
     }
 
     public void startPersistence() throws Exception {
-        persistence.init(databaseRConfiguration.getDatabasesWithConfiguration(),classPersistence);
+        persistence.init(databaseRConfiguration.getDatabasesWithConfiguration(), classPersistence);
     }
 }
