@@ -18,7 +18,7 @@ public class DatabaseImpl extends Util implements IDatabase {
         ResultSet rs = null;
         try {
             conn = getConnection();
-            ps = conn.prepareStatement("SELECT * FROM SDDBRC_database");
+            ps = conn.prepareStatement("SELECT * FROM SDDBRC_database WHERE sddbrc_database_active = 1");
             rs = ps.executeQuery();
             List<Databases> bancos = new ArrayList<>();
             while (rs.next() == true) {
