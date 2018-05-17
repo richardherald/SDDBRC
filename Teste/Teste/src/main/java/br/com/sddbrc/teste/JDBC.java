@@ -1,7 +1,5 @@
 package br.com.sddbrc.teste;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 import java.io.IOException;
 import static java.lang.Thread.sleep;
 import java.sql.Connection;
@@ -13,7 +11,6 @@ import java.util.Random;
 
 public class JDBC {
 
-    HikariDataSource datasource;
     private static Random random = new Random(3000);
     private static final boolean continuar = true;
     private int contador = 0;
@@ -47,7 +44,7 @@ public class JDBC {
                             ps.executeUpdate();
                             long tf = System.currentTimeMillis();
                             long tempo = tf - ti;
-                            System.out.println(new StringBuffer().append(tempo).append(";").append(contador).toString());
+                            System.out.println(new StringBuffer().append(tempo).append(";").append(++contador).toString());
                             sleep(random.nextInt(3000));
                         } catch (Exception e) {
                         }
@@ -67,9 +64,7 @@ public class JDBC {
             String pass = "Islan@123";
             Class.forName(driver);
             return DriverManager.getConnection(url, user, pass);
-        } catch (NumberFormatException e) {
-            throw e;
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (NumberFormatException | ClassNotFoundException | SQLException e) {
             throw e;
         }
     }

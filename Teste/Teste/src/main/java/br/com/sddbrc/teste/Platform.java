@@ -1,6 +1,5 @@
 package br.com.sddbrc.teste;
 
-
 import br.com.sddbrc.commons.model.CommandJDBC;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -15,6 +14,7 @@ public class Platform {
     private static final int port = 12345;
     private static boolean continuar = true;
     private static Random random = new Random(3000);
+    private int contador = 0;
 
     public void callSocketServer(String host, int port, final int i) throws Exception {
         try {
@@ -40,7 +40,7 @@ public class Platform {
                             in.readObject();
                             long tf = System.currentTimeMillis();
                             long tempo = tf - ti;
-                            System.out.println(tempo);
+                            System.out.println(new StringBuffer().append(tempo).append(";").append(++contador).toString());
                             sleep(random.nextInt(3000));
                         } catch (Exception e) {
                         }
@@ -56,8 +56,7 @@ public class Platform {
         try {
             for (int i = 0; i < quantidade; i++) {
                 callSocketServer(host, port, i);
-            }
-            System.out.println("Finalizando o for --------------------");
+            };
         } catch (Exception e) {
             throw e;
         }
