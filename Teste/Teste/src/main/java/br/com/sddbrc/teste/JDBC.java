@@ -16,6 +16,7 @@ public class JDBC {
     HikariDataSource datasource;
     private static Random random = new Random(3000);
     private static final boolean continuar = true;
+    private int contador = 0;
 
     public void stressJDBCInsert(int quantidade) throws IOException, Exception {
         try {
@@ -46,7 +47,7 @@ public class JDBC {
                             ps.executeUpdate();
                             long tf = System.currentTimeMillis();
                             long tempo = tf - ti;
-                            System.out.println(tempo);
+                            System.out.println(new StringBuffer().append(tempo).append(";").append(contador).toString());
                             sleep(random.nextInt(3000));
                         } catch (Exception e) {
                         }
