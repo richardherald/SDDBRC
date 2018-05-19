@@ -12,9 +12,13 @@ public class Databases extends Datasource {
     private String database_Driver;
     private String database_ClassDatasource;
     private Integer database_Priority;
-    private Configurations configuration = new Configurations();
-    private List<Identifier> identifiers = new ArrayList<>();
-    private List<Databases_R_Transactions> databaseRTransactions = new ArrayList<>();
+    private Configurations configuration;
+    private List<Databases_R_Transactions> databaseRTransactions;
+
+    public Databases() {
+        configuration = new Configurations();
+        databaseRTransactions = new ArrayList<>();
+    }
 
     /**
      * @return the database_Id
@@ -129,20 +133,6 @@ public class Databases extends Datasource {
     }
 
     /**
-     * @return the identifiers
-     */
-    public List<Identifier> getIdentifiers() {
-        return identifiers;
-    }
-
-    /**
-     * @param identifiers the identifiers to set
-     */
-    public void setIdentifiers(List<Identifier> identifiers) {
-        this.identifiers = identifiers;
-    }
-
-    /**
      * @return the databaseRTransactions
      */
     public List<Databases_R_Transactions> getDatabaseRTransactions() {
@@ -155,7 +145,4 @@ public class Databases extends Datasource {
     public void setDatabaseRTransactions(List<Databases_R_Transactions> databaseRTransactions) {
         this.databaseRTransactions = databaseRTransactions;
     }
-
-   
-
 }

@@ -8,7 +8,11 @@ import br.com.sddbrc.configuration.IConfigurationConnection;
 
 public class ConfigurationConnection_DBImpl implements IConfigurationConnection {
 
-    private static Databases SDDBRC_POOL = new Databases();
+    private static Databases SDDBRC_POOL;
+
+    public ConfigurationConnection_DBImpl() {
+        SDDBRC_POOL = new Databases();
+    }
 
     @Override
     public void loadConfiguration() throws Exception {
@@ -24,7 +28,7 @@ public class ConfigurationConnection_DBImpl implements IConfigurationConnection 
             hikariConfig.addDataSourceProperty("prepStmtCacheSize", Property.DB.getProperty("prepStmtCacheSize"));
             hikariConfig.addDataSourceProperty("prepStmtCacheSqlLimit", Property.DB.getProperty("prepStmtCacheSqlLimit"));
             HikariDataSource datasource = new HikariDataSource(hikariConfig);
-            getSDDBRC_POOL().setDatasource(datasource);
+            SDDBRC_POOL.setDatasource(datasource);
         } catch (NumberFormatException e) {
             throw e;
         } catch (Exception e) {

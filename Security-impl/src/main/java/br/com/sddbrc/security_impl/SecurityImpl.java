@@ -5,7 +5,11 @@ import br.com.sddbrc.security.ISecurity;
 
 public class SecurityImpl implements ISecurity {
 
-    br.com.sddbrc.core.Runtime runtime = new br.com.sddbrc.core.Runtime();
+   private final br.com.sddbrc.core.Runtime runtime;
+
+    public SecurityImpl() {
+        this.runtime = new br.com.sddbrc.core.Runtime();
+    }
 
     @Override
     public Object basicSecurity(String username, String password, CommandJDBC commandJDBC) throws Exception {

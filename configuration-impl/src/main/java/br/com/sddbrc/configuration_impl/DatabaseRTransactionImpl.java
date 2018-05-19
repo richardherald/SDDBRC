@@ -1,7 +1,6 @@
 package br.com.sddbrc.configuration_impl;
 
 import br.com.sddbrc.commons.model.Databases_R_Transactions;
-import br.com.sddbrc.commons.model.enums.Sincronization;
 import br.com.sddbrc.configuration.IDatabaseRTransaction;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

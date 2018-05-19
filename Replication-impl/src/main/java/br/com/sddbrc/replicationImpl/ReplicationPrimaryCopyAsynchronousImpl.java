@@ -9,8 +9,13 @@ import java.util.List;
 
 public class ReplicationPrimaryCopyAsynchronousImpl extends IReplication {
 
-    private PersistenceImpl persistence = new PersistenceImpl();
-    private br.com.sddbrc.core.Runtime runtime = new br.com.sddbrc.core.Runtime();
+    private final PersistenceImpl persistence;
+
+    public ReplicationPrimaryCopyAsynchronousImpl() {
+         persistence = new PersistenceImpl();
+    }
+    
+    
     
     @Override
     public void algorithm(List<Databases> datasources, List<Databases_R_Transactions> transactions) throws Exception {
@@ -30,20 +35,4 @@ public class ReplicationPrimaryCopyAsynchronousImpl extends IReplication {
             throw e;
         }
     }
-
-//    @Override
-//    public void algorithmReplication(List<Databases> databases, CommandJDBC commandJDBC) throws Exception {
-//        Connection conn = persistence.getPOLL_MASTER().getDatasource().getConnection();
-//        conn.setAutoCommit(commandJDBC.isBeginTransaction());c
-//        commandJDBC.setCon(conn);
-//        runtime.execute(commandJDBC);
-//        if (commandJDBC.isBeginTransaction()) {
-//            conn.commit();
-//        }
-//        //LOGICA DOS OUTROS BANCOS
-//        for (int i = 0; i < databases.size(); i++) {
-//            Databases dbs = databases.get(i);
-//            
-//        }
-//    }
 }

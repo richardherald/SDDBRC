@@ -12,23 +12,31 @@ public class InitApplication {
 
     private final String classReplication = "br.com.sddbrc.replicationImpl.ReplicationPrimaryCopyAsynchronousImpl";
     private final String classPersistence = "br.com.sddbrc.persistence_impl.PersistenceImpl";
-    private PersistenceImpl persistence = new PersistenceImpl();
-    private ConfigurationConnection_DBImpl configurationConnection = new ConfigurationConnection_DBImpl();
-    private DatabaseRConfigurationImpl databaseRConfiguration = new DatabaseRConfigurationImpl();
-    private Runtime runtime = new Runtime();
-    private ConnectionImpl connection = new ConnectionImpl();
-    private static InitApplication initApplication = new InitApplication();
+    private final PersistenceImpl persistence;
+    private final ConfigurationConnection_DBImpl configurationConnection;
+    private final DatabaseRConfigurationImpl databaseRConfiguration;
+    private final Runtime runtime;
+    private final ConnectionImpl connection;
+    private final static InitApplication INIT_APPLICATION = new InitApplication();
+
+    public InitApplication() {
+        persistence = new PersistenceImpl();
+        configurationConnection = new ConfigurationConnection_DBImpl();
+        databaseRConfiguration = new DatabaseRConfigurationImpl();
+        runtime = new Runtime();
+        connection = new ConnectionImpl();
+    }
 
     public static void main(String[] args) throws Exception {
         System.out.println("Ligando Configuracoes");
-        initApplication.startConfiguration();
+        INIT_APPLICATION.startConfiguration();
         System.out.println("Ligando Persistencia");
-        initApplication.startPersistence();
+        INIT_APPLICATION.startPersistence();
         System.out.println("Ligando Replicacao");
-        initApplication.startReplication();
+        INIT_APPLICATION.startReplication();
 //        initApplication.schedulerReplication();
         System.out.println("Ligando Servidor Socket");
-        initApplication.startServerSocket();
+        INIT_APPLICATION.startServerSocket();
     }
 
     public void schedulerReplication() throws Exception {

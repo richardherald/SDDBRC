@@ -5,14 +5,11 @@ import java.sql.Connection;
 
 public class CommandJDBC implements Serializable{
 
-    private String query = null;
-    private boolean generatedKeys = false;
-    private String DML = null;
+    private String query;
+    private boolean generatedKeys;
+    private String DML;
     private Connection con = null;
-    private boolean beginTransaction = false;
-
-    public CommandJDBC() {
-    }
+    private boolean beginTransaction;
 
     public boolean isGeneratedKeys() {
         return generatedKeys;

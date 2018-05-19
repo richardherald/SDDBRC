@@ -1,3 +1,4 @@
+
 package br.com.sddbrc.teste;
 
 import java.io.IOException;
@@ -12,7 +13,6 @@ import java.util.Random;
 public class JDBC {
 
     private static Random random = new Random(3000);
-    private static final boolean continuar = true;
     private int contador = 0;
 
     public void stressJDBCInsert(int quantidade) throws IOException, Exception {
@@ -34,7 +34,7 @@ public class JDBC {
                         sleep(random.nextInt(3000));
                     } catch (Exception e) {
                     }
-                    while (continuar) {
+                    while (true) {
                         long ti = System.currentTimeMillis();
                         String script_pessoa = "INSERT INTO Pessoa (pessoa_Nome,pessoa_Cpf,pessoa_sexo,pessoa_dataNascimento,pessoa_Email) VALUES ('Richard','12345678900','M','12/05/2018 00:35:00.000','email@email.com')";
                         try (

@@ -15,11 +15,19 @@ import java.util.List;
 public class Runtime {
 
     private IReplication replicationClass;
-    private PersistenceImpl persistence = new PersistenceImpl();
-    private DatabaseRTransactionImpl transactions = new DatabaseRTransactionImpl();
-    private TransactionImpl transactionImpl = new TransactionImpl();
-    private boolean ReplicationIsRun = false;
+    private final PersistenceImpl persistence;
+    private final DatabaseRTransactionImpl transactions;
+    private final TransactionImpl transactionImpl;
+    private boolean ReplicationIsRun;
 
+    public Runtime() {
+        replicationClass = null;
+        persistence = new PersistenceImpl();
+        transactions = new DatabaseRTransactionImpl();
+        transactionImpl = new TransactionImpl();
+    }
+
+    @SuppressWarnings("SleepWhileInLoop")
     public void schedulerReplication() throws Exception {
         try {
             while (true) {
@@ -49,7 +57,7 @@ public class Runtime {
 
     public Object execute(CommandJDBC command) throws Exception {
         try {
-            Object object = null;
+            Object object;
             command.setCon(persistence.getPOLL_MASTER().getDatasource().getConnection());
             if (persistence.findScriptByName(command.getQuery(), "SELECT")) {
                 object = persistence.executeQuery(command);
