@@ -42,7 +42,9 @@ public class Platform {
                         try (
                                 Socket cliente = new Socket(host, port);
                                 ObjectOutputStream out = new ObjectOutputStream(cliente.getOutputStream());
-                                ObjectInputStream in = new ObjectInputStream(cliente.getInputStream());) {
+                                ObjectInputStream in = new ObjectInputStream(cliente.getInputStream());
+                            ) 
+                        {
                             long ti = System.currentTimeMillis();
                             out.writeObject(command);
                             out.flush();
