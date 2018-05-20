@@ -10,29 +10,98 @@
     
     <dependencies>
         <dependency>
+            <groupId>br.com.sddbrc.connection</groupId>
+            <artifactId>Connection</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
             <groupId>br.com.sddbrc.connection-impl</groupId>
             <artifactId>Connection-impl</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>br.com.sddbrc.replication</groupId>
+            <artifactId>Replication</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>br.com.sddbrc.replication-impl</groupId>
             <artifactId>Replication-impl</artifactId>
             <version>1.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>br.com.sddbrc</groupId>
+                    <artifactId>SDDBRC</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>br.com.sddbrc.security</groupId>
+            <artifactId>Security</artifactId>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>br.com.sddbrc.security-impl</groupId>
             <artifactId>Security-impl</artifactId>
+            <version>1.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>br.com.sddbrc</groupId>
+                    <artifactId>SDDBRC</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>br.com.sddbrc.persistence</groupId>
+            <artifactId>Persistence</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>br.com.sddbrc.persistence-impl</groupId>
             <artifactId>Persistence-impl</artifactId>
             <version>1.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.zaxxer</groupId>
+                    <artifactId>HikariCP</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.microsoft.sqlserver</groupId>
+                    <artifactId>mssql-jdbc</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.postgresql</groupId>
+                    <artifactId>postgresql</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>br.com.sddbrc.configuration</groupId>
+            <artifactId>Configuration</artifactId>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>br.com.sddbrc.configuration-impl</groupId>
             <artifactId>configuration-impl</artifactId>
             <version>1.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>br.com.sddbrc.configuration</groupId>
+                    <artifactId>configuration</artifactId>
+                </exclusion>
+                <exclusion> 
+                    <groupId>com.zaxxer</groupId>
+                    <artifactId>HikariCP</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.microsoft.sqlserver</groupId>
+                    <artifactId>mssql-jdbc</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.microsoft.sqlserver</groupId>
+                    <artifactId>mssql-jdbc</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>br.com.sddbrc.commons</groupId>

@@ -8,11 +8,7 @@ import br.com.sddbrc.configuration.IConfigurationConnection;
 
 public class ConfigurationConnection_DBImpl implements IConfigurationConnection {
 
-    private static Databases SDDBRC_POOL;
-
-    public ConfigurationConnection_DBImpl() {
-        SDDBRC_POOL = new Databases();
-    }
+    private static Databases SDDBRC_POOL = new Databases();
 
     @Override
     public void loadConfiguration() throws Exception {

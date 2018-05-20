@@ -12,20 +12,12 @@ public class InitApplication {
 
     private final String classReplication = "br.com.sddbrc.replicationImpl.ReplicationPrimaryCopyAsynchronousImpl";
     private final String classPersistence = "br.com.sddbrc.persistence_impl.PersistenceImpl";
-    private final PersistenceImpl persistence;
-    private final ConfigurationConnection_DBImpl configurationConnection;
-    private final DatabaseRConfigurationImpl databaseRConfiguration;
-    private final Runtime runtime;
-    private final ConnectionImpl connection;
+    private final PersistenceImpl persistence = new PersistenceImpl();
+    private final ConfigurationConnection_DBImpl configurationConnection = new ConfigurationConnection_DBImpl();
+    private final DatabaseRConfigurationImpl databaseRConfiguration = new DatabaseRConfigurationImpl();
+    private final Runtime runtime = new Runtime();
+    private final ConnectionImpl connection = new ConnectionImpl();
     private final static InitApplication INIT_APPLICATION = new InitApplication();
-
-    public InitApplication() {
-        persistence = new PersistenceImpl();
-        configurationConnection = new ConfigurationConnection_DBImpl();
-        databaseRConfiguration = new DatabaseRConfigurationImpl();
-        runtime = new Runtime();
-        connection = new ConnectionImpl();
-    }
 
     public static void main(String[] args) throws Exception {
         System.out.println("Ligando Configuracoes");

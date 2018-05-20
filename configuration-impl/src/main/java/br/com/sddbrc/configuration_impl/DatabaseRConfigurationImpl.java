@@ -13,7 +13,7 @@ public class DatabaseRConfigurationImpl implements IDatabaseRConfiguration {
             IDatabase databaseImpl = new DatabaseImpl();
             ConfigurationImpl configurationImpl = new ConfigurationImpl();
             List<Databases> databases = databaseImpl.getAll();
-            for (int i = 0; i < databases.size(); i++){
+            for (int i = 0; i < databases.size(); i++) {
                 databases.get(i).setConfiguration(configurationImpl.getByDatabaseId(databases.get(i).getDatabase_Id()));
             }
             return databases;
