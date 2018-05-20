@@ -31,15 +31,15 @@ nbdist/
 
 target/
 /SDDBRC/target/
-/connection-impl/nbproject/private/
+/Conexao-impl/nbproject/private/
 /Configuracao/nbproject/private/
 /Configuracao-impl/nbproject/private/
 /Seguranca-impl/nbproject/private/
 /Persistencia-impl/nbproject/private/
 /Replicacao-impl/nbproject/private/
 
-connection/nb-configuration\.xml
-connection-impl/nb-configuration\.xml
+conexao/nb-configuration\.xml
+conexao-impl/nb-configuration\.xml
 configuration/nb-configuration\.xml
 configuration-impl/nb-configuration\.xml
 Security/nb-configuration\.xml
