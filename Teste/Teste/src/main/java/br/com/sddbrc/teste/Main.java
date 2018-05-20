@@ -6,7 +6,7 @@ public class Main {
     private static JDBC jdbc = new JDBC();
     
     public static void main(String[] args) throws Exception {
-        platform.stressPlataformaInsert(1000);
-//        jdbc.stressJDBCInsert(1000);
+        platform.stressPlataformaInsert(25);
+//        jdbc.stressJDBCInsert(100);
     }
 }

@@ -13,7 +13,7 @@ import java.util.Random;
 public class JDBC {
 
     private static Random random = new Random(3000);
-    private int contador = 0;
+//    private int contador = 0;
 
     public void stressJDBCInsert(int quantidade) throws IOException, Exception {
         try {
@@ -21,7 +21,7 @@ public class JDBC {
                 callJDBC();
             }
         } catch (Exception e) {
-            throw e;
+           System.out.println(e.getMessage());
         }
     }
 
@@ -33,6 +33,7 @@ public class JDBC {
                     try {
                         sleep(random.nextInt(3000));
                     } catch (Exception e) {
+                        System.out.println(e.getMessage());
                     }
                     while (true) {
                         long ti = System.currentTimeMillis();
@@ -44,15 +45,16 @@ public class JDBC {
                             ps.executeUpdate();
                             long tf = System.currentTimeMillis();
                             long tempo = tf - ti;
-                            System.out.println(new StringBuffer().append(tempo).append(";").append(++contador).toString());
+                            System.out.println(tempo);
                             sleep(random.nextInt(3000));
                         } catch (Exception e) {
+                            System.out.println(e.getMessage());
                         }
                     }
                 }
             }.start();
         } catch (Exception e) {
-            throw e;
+           System.out.println(e.getMessage());
         }
     }
 
