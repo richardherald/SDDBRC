@@ -79,6 +79,14 @@ public class Runtime {
             throw e;
         }
     }
+    
+    public void atualizarTransacao(Databases_R_Transactions databaseRtransactions) throws Exception {
+        try {
+            transactions.update(databaseRtransactions);
+        }catch (Exception e) {
+            throw e;
+        }
+    }
 
     public IReplication getReplicationClass() {
         return replicationClass;

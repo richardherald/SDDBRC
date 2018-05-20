@@ -12,6 +12,7 @@ public class Databases_R_Transactions {
     private Transaction transaction;
 
     public Databases_R_Transactions() {
+        transaction = new Transaction();
     }
 
     public Databases_R_Transactions(Integer database_R_Transaction_Id, Integer transaction_Id, Integer database_Id, Integer sincronization_Id, Timestamp database_R_Transaction_DateSincronization, Transaction transaction) {

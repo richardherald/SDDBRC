@@ -144,7 +144,7 @@ public class PersistenceImpl extends Util implements IPersistence {
             List<Databases> listDatabases = new ArrayList<>();
             for (int i = 0; i < getPOOLS().size(); i++) {
                 try (Connection conn = getPOOLS().get(i).getDatasource().getConnection();) {
-                    if (conn.isClosed()) {
+                    if (!conn.isClosed()) {
                         listDatabases.add(getPOOLS().get(i));
                     }
                 }
